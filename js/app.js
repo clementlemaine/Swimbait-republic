@@ -247,6 +247,8 @@
           }, 160);
         };
         pre.src = s.dataset.src;
+        var sideTab = $('.vtab[data-view="profil"]', scope);
+        if (sideTab && !sideTab.classList.contains("is-on")) sideTab.click();
         if (scope.id === "colours") {
           var hero = $(".pd-lure img"); if (hero) hero.src = s.dataset.src;
           var th = $('.vtab[data-view="profil"] .vtab-thumb img'); if (th) th.src = s.dataset.src;

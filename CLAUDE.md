@@ -32,15 +32,13 @@ Abandonné à la demande de Clément (2026-11-19) : la vue du dessus dessinée d
 Le français et l'espagnol sont des traductions faites par Claude : à faire relire par le client (vocabulaire pêche : flottant lent / coulant lent, flotante lento / hundimiento lento).
 
 
-## Vues 6 angles des fiches Glideway (2026-11-19)
+## Fiches Glideway (version compacte, 2026-11-19)
 
-Sous le titre de chaque fiche, il y a 6 boutons : Profil · Face · Autre côté · Dessus · Dessous · Arrière.
-Seul le profil a une vraie photo (le coloris détouré). Les 5 autres affichent « Photo à venir », car le client n'a pas ces photos.
-**Pour les ajouter :** déposer `img/views/<126|176|236>/<face|autre-cote|dessus|dessous|arriere>.webp` (fond blanc ou détouré), puis `python3 build.py`. La photo remplace automatiquement « Photo à venir ». **Ne pas générer ni dessiner ces vues.**
+Même plan pour 126, 176 et 236 : leurre + **tous ses coloris juste dessous** (cliquer change le leurre) → bande olive avec les chiffres (longueur, poids, coloris…) → caractéristiques + conseil de montage (+ matériel conseillé pour le 126) → **la vidéo du modèle** (126 → glideway-126.mp4, etc.) → petit / grand frère.
+Retirés à la demande de Clément : texte de présentation, photos de présentation, module de profondeur (déjà sur l'accueil), nuancier séparé, encart accessoires.
+Vues : seulement **Profil** (vraie photo) et **Face** (générée, 176 uniquement). Dessus / dessous / autre côté retirés (« pas identique », « trop large »), gardés dans `_scrape/gen/rejet/`. **Ne plus générer de vues du leurre.** Une vraie photo déposée dans `img/views/<taille>/face.webp` ajoute le bouton Face.
 
-**État des vues (2026-11-19) :** Glideway 176 = profil (vraie photo), autre côté (vraie photo en miroir), face (générée par Nano Banana Pro, à faire valider par le client), dessus et dessous = générés par Nano Banana Pro **à partir de vraies références** : pour le dessus, la photo du dessus fournie par Clément (`_scrape/client/glideway-176-dessus.png`), repeinte en Bone Soldier ; pour le dessous, des images du ventre extraites de leur film 176 (`_scrape/belly/`, vers 28-34 s : deux cavités Lead Stickers l'une derrière l'autre de part et d'autre de l'attache, puis la seconde attache sur la partie arrière). Arrière = « photo à venir ». Coût total Gemini engagé : environ 1,10 $ (8 images). Dessus et dessous générés ont été **refusés par Clément (« le leurre n'est pas comme ça »)**, mis de côté dans `_scrape/gen/rejet/`. Ne plus générer de vues du produit : seulement de vraies photos du client. 126 et 236 : seulement le profil. Script : `tools/prepare_views.py`. Coût Gemini engagé : 4 images 2K, environ 0,55 $.
-
-**Retour arrière :** sur les fiches, bouton rouge « ← Volver » ; le bouton retour du navigateur ramène aussi au même endroit, avec la même taille choisie (position gardée en sessionStorage). Le rechargement repart en haut.
+**Retour arrière :** bouton rouge « ← Volver » sur les fiches ; le bouton retour du navigateur ramène aussi au même endroit, avec la même taille choisie. Le rechargement repart en haut.
 
 ## Règles
 

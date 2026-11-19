@@ -889,3 +889,23 @@ html { overflow-x: clip; }
 
 /* vue du dessus (photo client, petite) : taille limitée pour rester nette */
 /* (limite de taille retirée : la vue du dessus est maintenant en haute définition) */
+
+/* visionneuse réduite : 2 boutons centrés */
+.views-tabs { grid-template-columns: repeat(auto-fit, minmax(120px, 180px)); justify-content: center; }
+
+/* fiche compacte : coloris juste sous le leurre, chiffres, vidéo */
+.pd-colors { margin: .2rem 0 1.4rem; }
+.pd-colors-head { margin: 0 0 .7rem; font: 700 1rem var(--f-body); color: var(--muted); }
+.pd-colors-head span { text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; color: var(--red); }
+.pd-colors-head strong { font: 400 1.35rem/1 var(--f-stencil); text-transform: uppercase; color: var(--olive); }
+.pd-colors-head em { font-style: normal; font-size: .9rem; }
+.pd-swatches { grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: .4rem; }
+.pd-swatches .swatch { padding: .5rem .35rem .45rem; background: #fff; border-width: 2px; }
+.pd-swatches .swatch img { height: 34px; }
+.pd-swatches .swatch span { font-size: .74rem; }
+.pd-facts { background: var(--olive); color: var(--bg); padding: calc(var(--sec) * .7) 0; }
+.pd-facts .stats { margin: 0; border-top: 0; }
+.pd-facts .stats > div { padding-top: 0; }
+.pd-facts .chips { margin-top: 1.4rem; }
+.pd-hero-inner { padding-bottom: 2rem; }
+@media (max-width: 640px) { .pd-swatches { grid-template-columns: repeat(3, 1fr); } }

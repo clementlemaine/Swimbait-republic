@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1341"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1346"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["es", "en", "fr"]          # l'espagnol est la langue par défaut (pages sans suffixe)
 DEFAULT = "es"
 CUR = {"lang": DEFAULT}
@@ -623,13 +623,10 @@ def swimbaits():
 
 
 # vues du leurre sous 6 angles : une photo déposée dans img/views/<taille>/<vue>.webp apparaît toute seule
+# Clément (2026-11-19) : seulement le côté et la face ; dessus / dessous / autre côté retirés.
 VIEWS = [
     ("profil", L("Side", "Profil", "Perfil")),
     ("face", L("Front", "Face", "Frente")),
-    ("autre-cote", L("Other side", "Autre côté", "Otro lado")),
-    ("dessus", L("Top", "Dessus", "Arriba")),
-    ("dessous", L("Bottom", "Dessous", "Abajo")),
-    ("arriere", L("Back", "Arrière", "Atrás")),
 ]
 CAMERA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
 
@@ -643,9 +640,9 @@ def views_block(k, g, name):
         elif os.path.exists(os.path.join(ROOT, own)):
             src = own
         else:
-            src = None
+            continue          # pas de photo pour cette vue : on ne l'affiche pas
         if key == "profil":
-            inner = f'<div class="pd-lure"><img src="{src}" alt="{name} — {_(label)}" fetchpriority="high"></div>'
+            inner = f'<div class="pd-lure"><img class="viewer-img" src="{src}" alt="{name} — {_(label)}" fetchpriority="high"></div>'
         elif src:
             inner = f'<img class="view-img" src="{src}" alt="{name} — {_(label)}" loading="lazy">'
         else:
@@ -658,56 +655,57 @@ def views_block(k, g, name):
     return f"""
     <div class="views" data-views>
       <div class="views-stage">{stages}</div>
-      <div class="views-tabs" role="tablist" aria-label="{_(L('Views', 'Vues', 'Vistas'))}">{tabs}</div>
+      {'' if tabs.count('role="tab"') < 2 else f'<div class="views-tabs" role="tablist" aria-label="{_(L("Views", "Vues", "Vistas"))}">{tabs}</div>'}
     </div>"""
 
 
 def glideway(k):
+    """Fiche compacte (demande de Clément) : leurre + tous ses coloris juste dessous,
+    puis les chiffres et caractéristiques, puis la vidéo du modèle, puis les petits / grands frères."""
     g = GLIDEWAYS[k]
     name = f"Glideway {k}"
     i = ORDER.index(k)
     prev_k, next_k = ORDER[i - 1] if i > 0 else None, ORDER[i + 1] if i < 2 else None
-    body_p = "".join(f"<p>{_(p)}</p>" for p in g["body"])
     retr = ""
     if g.get("retrieves"):
         retr = '<ul class="chips">' + "".join(f"<li>{_(r)}</li>" for r in g["retrieves"]) + "</ul>"
     gear = ""
     if g["gear"]:
         gear = f'<div class="gear-rec"><p class="eyebrow">{_(U["gear"])}</p>{spec_list(g["gear"], "")}</div>'
-    p1, p2 = g["photos"]
+    start = g["hero"]
+    swatches = "".join(
+        f'<li><button class="swatch{" is-on" if cid == start else ""}" data-src="{color_img(g["pid"], cid)}" data-name="{e(n)}" aria-pressed="{"true" if cid == start else "false"}">'
+        f'<img src="{color_img(g["pid"], cid)}" alt="" loading="lazy"><span>{e(n)}</span></button></li>'
+        for cid, n in g["colors"])
     nav = ""
     for kk, lab in ((prev_k, L("Smaller brother", "Petit frère", "Hermano pequeño")), (next_k, L("Bigger brother", "Grand frère", "Hermano mayor"))):
         if kk:
             gg = GLIDEWAYS[kk]
             nav += f'<a class="pnav-item" href="{url(f"glideway-{kk}")}"><small>{_(lab)}</small><strong>Glideway {kk}</strong><img src="{color_img(gg["pid"], gg["hero"])}" alt="" loading="lazy"></a>'
     body = f"""
-<section class="pd-hero">
+<section class="pd-hero" id="colours">
   <div class="wrap pd-hero-inner">
     <div class="pd-back"><a class="back-btn" href="{url('index')}" data-back>← {_(L('Back', 'Retour', 'Volver'))}</a><a class="crumb" href="{url('swimbaits')}">Swimbaits</a><span class="crumb-sep">/</span><span class="crumb-cur">{name}</span></div>
     <p class="eyebrow">{_(g['kicker'])}</p>
     <h1 class="stencil pd-title" data-split>{name}</h1>
     {views_block(k, g, name)}
+    <div class="pd-colors">
+      <p class="pd-colors-head"><span>{_(L('Colour', 'Coloris', 'Color'))} :</span> <strong class="viewer-name">{e(dict(g['colors'])[start])}</strong> <em>· {_(U['colours_n']).format(n=len(g['colors']))}</em></p>
+      <ul class="swatches pd-swatches">{swatches}</ul>
+    </div>
     <div class="pd-hero-foot">
       <p class="pd-tag">{_(U['tagline'])}</p>
-      <div class="hero-ctas">{btn('#colours', U['chart'])}{btn(url('dealers'), U['where_buy'], 'btn btn-ghost')}</div>
+      <div class="hero-ctas">{btn('#film', U['watch'], 'btn btn-red')}{btn(url('dealers'), U['where_buy'], 'btn btn-ghost')}</div>
     </div>
   </div>
 </section>
 
-<section class="pd-intro">
-  <div class="wrap pd-intro-grid">
-    <p class="pd-lede">{_(g['lede'])}</p>
-    <div class="pd-body">{body_p}{retr}</div>
+<section class="pd-facts">
+  <div class="wrap">
+    {stats(g['stats'])}
+    {retr}
   </div>
-  <div class="wrap">{stats(g['stats'])}</div>
 </section>
-
-<section class="pd-photos wrap">
-  <figure class="ph-big"><div class="ph-clip"><img src="img/{p1[0]}" alt="{e(p1[1])}" loading="lazy" data-parallax-img></div></figure>
-  <figure class="ph-small"><div class="ph-clip"><img src="img/{p2[0]}" alt="{e(p2[1])}" loading="lazy" data-parallax-img></div></figure>
-</section>
-
-{depth_section(g)}
 
 <section class="specs wrap">
   <h2 class="h2">{_(U['specs'])}</h2>
@@ -716,16 +714,7 @@ def glideway(k):
   {gear}
 </section>
 
-{film(g['film'], g['film'], name)}
-
-{color_chart(g['pid'], g['colors'], name, g['hero'])}
-
-<section class="upsell wrap">
-  <a class="upsell-card" href="{url('accessories')}">
-    <img src="img/photos/lead-stickers-2.webp" alt="" loading="lazy">
-    <div><p class="eyebrow">{_(L('Make it yours', 'Personnalisez-le', 'Hazlo tuyo'))}</p><h3>Spare Tails &amp; Lead Stickers</h3><p>{_(L('Change the colour of the tail, change the depth of the dive.', 'Changez la couleur de la queue, changez la profondeur de nage.', 'Cambia el color de la cola, cambia la profundidad de nado.'))}</p>{ICONS['arrow']}</div>
-  </a>
-</section>
+<div id="film">{film(g['film'], g['film'], name)}</div>
 
 <nav class="pnav wrap" aria-label="Glideway">{nav}</nav>
 """
