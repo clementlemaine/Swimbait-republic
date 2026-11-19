@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1246"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1247"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
@@ -496,7 +496,7 @@ def home():
   <div class="hero-shade" aria-hidden="true"></div>
   <div class="hero-inner wrap">
     <p class="eyebrow hero-eyebrow">{_(U['tagline'])}</p>
-    <h1 class="hero-title" data-split>{_(L('Off-road swimbaits', 'Swimbaits tout-terrain', 'Swimbaits todoterreno'))}</h1>
+    <h1 class="hero-title" data-split>{_(L('Swimbait Republic official website', 'Site officiel Swimbait Republic', 'Web oficial de Swimbait Republic'))}</h1>
     <p class="lede">{_(L('Glide baits made to increase the quantity — and especially the quality — of your bites.', 'Des glide baits pensés pour augmenter la quantité — et surtout la qualité — de vos touches.', 'Glide baits creados para aumentar la cantidad — y sobre todo la calidad — de tus picadas.'))}</p>
     <div class="hero-ctas">{btn('#range', L('Discover the Glideway', 'Découvrir le Glideway', 'Descubrir el Glideway'))}{btn('#film', U['watch'], 'btn btn-ghost')}</div>
     <nav class="hero-cats" aria-label="{_(U['products'])}">{hero_cats}</nav>
@@ -558,7 +558,7 @@ def home():
   </div>
 </section>
 """
-    return layout("index", L("Swimbait Republic — Off-road swimbaits", "Swimbait Republic — Swimbaits tout-terrain", "Swimbait Republic — Swimbaits todoterreno"),
+    return layout("index", L("Swimbait Republic official website", "Site officiel Swimbait Republic", "Web oficial de Swimbait Republic"),
                   L("Glideway 126, 176 and 236: glide baits garage designed and worldwide tested.", "Glideway 126, 176 et 236 : des glide baits conçus au garage et testés dans le monde entier.", "Glideway 126, 176 y 236: glide baits diseñados en el garaje y probados en todo el mundo."), body)
 
 
