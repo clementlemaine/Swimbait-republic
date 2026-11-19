@@ -258,6 +258,28 @@
     form.reset();
   });
 
+
+  // ------------------------------------------------ mobile preview (desktop only, not inside the preview itself)
+  var mp = $("[data-mprev]");
+  if (mp && window.self === window.top && window.innerWidth > 900) {
+    mp.hidden = false;
+    var mpBtn = $(".mprev-btn", mp), mpFrame = $("iframe", mp);
+    function fit() {
+      var s = Math.min(0.8, Math.max(0.5, (window.innerHeight - 130) / 866));
+      mp.style.setProperty("--ms", s.toFixed(3));
+    }
+    mpBtn.addEventListener("click", function () {
+      var open = !mp.classList.contains("is-open");
+      mp.classList.toggle("is-open", open);
+      mpBtn.setAttribute("aria-expanded", String(open));
+      if (open) { fit(); if (!mpFrame.src) mpFrame.src = window.location.pathname.split("/").pop() || "index.html"; }
+    });
+    window.addEventListener("resize", fit);
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && mp.classList.contains("is-open")) mpBtn.click(); });
+  } else if (mp && window.self !== window.top) {
+    mp.remove();
+  }
+
   // ------------------------------------------------ main scroll loop
   function onScroll(y) { onScrollProgress(y); onScrollHero(y); }
 

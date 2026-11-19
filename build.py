@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1219"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1233"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
@@ -330,6 +330,17 @@ def layout(slug, title, desc, body, section=""):
   </div>
   <div class="footer-bottom"><span>© Swimbait Republic</span><span>{_(U['tagline'])}</span><span class="ver" id="ver">{V}</span></div>
 </footer>
+
+<div class="mprev" data-mprev hidden>
+  <button class="mprev-btn" type="button" aria-expanded="false" aria-controls="mprev-panel">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <span class="mprev-open">{_(L('Mobile view', 'Vue mobile', 'Vista móvil'))}</span><span class="mprev-close">{_(L('Close', 'Fermer', 'Cerrar'))}</span>
+  </button>
+  <div class="mprev-panel" id="mprev-panel" role="dialog" aria-label="{_(L('Mobile view', 'Vue mobile', 'Vista móvil'))}">
+    <div class="mprev-phone"><div class="mprev-notch"></div><iframe title="{_(L('Mobile view', 'Vue mobile', 'Vista móvil'))}" loading="lazy"></iframe></div>
+    <p class="mprev-hint">{_(L('Scroll inside the phone', 'Faites défiler dans le téléphone', 'Desliza dentro del móvil'))}</p>
+  </div>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
