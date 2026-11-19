@@ -59,4 +59,4 @@ Vues : seulement **Profil** (vraie photo) et **Face** (générée, 176 uniquemen
 ## Mise en ligne
 
 `./maj.sh "message"` met à jour le numéro de version CSS/JS, régénère les pages, commit et push.
-Dépôt GitHub : **à relier** (aucun dépôt Swimbait trouvé sur le compte au 2026-11-19).
+Dépôt GitHub : `clementlemaine/Swimbait-republic` (public). Site en ligne (GitHub Pages, branche main) : **https://clementlemaine.github.io/Swimbait-republic/** — se met à jour à chaque push.
