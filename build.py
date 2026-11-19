@@ -7,7 +7,7 @@ import html
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1144"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1158"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 
 # ---------------------------------------------------------------- DATA
 
@@ -183,8 +183,7 @@ def layout(slug, title, desc, body, section="", hero_dark=True):
 <footer class="footer">
   <div class="footer-top">
     <div class="footer-cta">
-      <p class="eyebrow">Join the Republic</p>
-      <p class="footer-title">Big baits.<br>Bigger bites.</p>
+      <img class="footer-logo" src="img/brand/logo.png" alt="Swimbait Republic" width="166" height="41" loading="lazy">
       {socials()}
       <p class="footer-handle">@swimbait_republic</p>
     </div>
@@ -198,7 +197,6 @@ def layout(slug, title, desc, body, section="", hero_dark=True):
         <a href="https://www.swimbaitrepublic.com/privacy-policy">Privacy policy</a><a href="https://www.swimbaitrepublic.com/cookie-policy">Cookie policy</a><a href="https://www.swimbaitrepublic.com/terms-and-conditions">Legal notice</a></div>
     </div>
   </div>
-  <div class="footer-word" aria-hidden="true">SWIMBAIT REPUBLIC</div>
   <div class="footer-bottom"><span>© Swimbait Republic</span><span>Garage designed &amp; worldwide tested</span><span class="ver" id="ver">{V}</span></div>
 </footer>
 
@@ -239,8 +237,8 @@ def depth_module(g, name, interactive=True):
 <section class="depth" data-depth-module>
   <div class="wrap depth-grid">
     <div class="depth-copy">
-      <p class="eyebrow" data-reveal>Lead Stickers · buoyancy</p>
-      <h2 class="h2" data-split>Dial in your depth.</h2>
+      <p class="eyebrow">Lead Stickers · buoyancy</p>
+      <h2 class="h2">Depth control</h2>
       <p data-reveal>{g["depth_text"]}</p>
       {f'<p class="note" data-reveal>{g["depth_note"]}</p>' if g["depth_note"] else ""}
       <div class="depth-btns" role="group" aria-label="Lead Stickers">{states}</div>
@@ -267,9 +265,9 @@ def color_chart(pid, colors, name, start=None):
 <section class="chart" id="colours">
   <div class="wrap">
     <div class="chart-head">
-      <div><p class="eyebrow" data-reveal>Colour chart · {len(colors)} finishes</p>
-      <h2 class="h2" data-split>Pick your poison.</h2></div>
-      <p class="chart-hint" data-reveal>Tap a colour to inspect it.</p>
+      <div><p class="eyebrow">{len(colors)} colours</p>
+      <h2 class="h2">Colour chart</h2></div>
+      <p class="chart-hint">Click a colour to see it in large.</p>
     </div>
     <div class="viewer" data-reveal>
       <div class="viewer-stage"><img class="viewer-img" src="{color_img(pid, start)}" alt="{e(name)} — {e(sname)}"></div>
@@ -306,12 +304,12 @@ def home():
         w = round(int(k) / 236 * 100, 1)
         weight = dict(g["specs"])["Weight"]
         fam += f"""
-      <a class="fam-row" href="glideway-{k}.html" style="--w:{w}%">
+      <a class="fam-row" href="glideway-{k}.html" style="--k:{w/100:.3f}">
         <span class="fam-name"><small>Glideway</small>{k}</span>
         <span class="fam-lure"><img src="{color_img(g['pid'], g['hero'])}" alt="Glideway {k}" loading="lazy"></span>
         <span class="fam-meta"><b>{weight}</b><em>{len(g['colors'])} colours</em>{ICONS['arrow']}</span>
       </a>"""
-    row1 = "".join(f'<img src="{color_img("1", c)}" alt="" loading="lazy">' for c, _ in C176[:15])
+    row1 = "".join(f'<img src="{color_img("1", c)}" alt="" loading="lazy">' for c, _ in C176)
     row2 = "".join(f'<img src="{color_img("1", c)}" alt="" loading="lazy">' for c, _ in C176[15:])
     steps = [
         ("01", "Concept", "First a concept or an idea clicks in our brain.", "photos/production.webp"),
@@ -332,31 +330,32 @@ def home():
   </div>
   <div class="hero-inner wrap">
     <p class="eyebrow hero-eyebrow">Garage designed · worldwide tested</p>
-    <h1 class="hero-title"><span class="hero-small" data-split>This is all about</span><span class="hero-big" data-split>Swimbaits.</span></h1>
-    <div class="hero-foot">
-      <p class="lede">Off-road swimbaits that will help you increase the quantity — and especially the quality — of the bites on your fishing journeys.</p>
-      <div class="hero-ctas">{btn("swimbaits.html", "Meet the Glideway")}{btn("#film", "Watch the film", "btn btn-ghost")}</div>
-    </div>
+    <h1 class="hero-title" data-split>Off-road swimbaits</h1>
+    <p class="lede">Glide baits made to increase the quantity — and especially the quality — of your bites.</p>
+    <div class="hero-ctas">{btn("swimbaits.html", "Discover the Glideway")}{btn("#film", "Watch the film", "btn btn-ghost")}</div>
   </div>
-  <div class="hero-scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
 </section>
 
-{marquee(["No jerkbaits", "No jigs", "No worms", "No crankbaits", "Only swimbaits"], "marquee-red")}
-
-<section class="manifesto">
+<section class="cats">
   <div class="wrap">
-    <p class="eyebrow" data-reveal>The Republic manifesto</p>
-    <p class="manifesto-text" data-words>If you're looking for jerkbaits, jigs, worms, crankbaits… you're in the wrong place. We put over 10 years of swimbait fishing into every lure we make — to help anglers catch bigger fish, in an easier way.</p>
-    {stats([("10", "+", "Years of swimbait fishing"), ("2", "yrs", "Of field testing, max"), ("3", "", "Glideway sizes"), ("12", "", "Countries")])}
+    <div class="sec-head sec-head-row">
+      <h2 class="h2">Products</h2>
+      <p>If you're looking for jerkbaits, jigs, worms, crankbaits… you're in the wrong place. This is all about swimbaits.</p>
+    </div>
+    <div class="cats-grid">
+      <a class="cat" href="swimbaits.html" data-reveal><img src="img/brand/cat-glideway.webp" alt="" loading="lazy"><span>Swimbaits</span></a>
+      <a class="cat" href="accessories.html" data-reveal><img src="img/brand/cat-sinkers.webp" alt="" loading="lazy"><span>Accessories</span></a>
+      <a class="cat" href="sneak-attack-711.html" data-reveal><img src="img/brand/cat-rods.webp" alt="" loading="lazy"><span>Rods</span></a>
+      <a class="cat" href="apparel.html" data-reveal><img src="img/brand/cat-apparel.webp" alt="" loading="lazy"><span>Apparel</span></a>
+    </div>
   </div>
 </section>
 
 <section class="family" id="family">
   <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow" data-reveal>The Glideway family · to scale</p>
-      <h2 class="h2" data-split>Three sizes.<br>One freestyler.</h2>
-      <p data-reveal>Slow floating out of the box, balanced to sit natural on the stop and swim at any speed. Pick the size that matches the fish you're after.</p>
+    <div class="sec-head sec-head-row">
+      <h2 class="h2">The Glideway range</h2>
+      <p>Three sizes, shown to scale. Slow floating out of the box, balanced to sit natural on the stop and swim at any speed.</p>
     </div>
     <div class="fam-list">{fam}
     </div>
@@ -366,10 +365,9 @@ def home():
 <section class="glide" data-glide aria-label="Glide action">
   <div class="glide-sticky">
     <div class="glide-water" aria-hidden="true"></div>
-    <p class="glide-word" aria-hidden="true">Freestyle</p>
+    <div class="glide-head wrap"><h2 class="h2">Glide action</h2><p>A wide S-shaped swim, side to side. It works at any speed and with any retrieve:</p></div>
     <div class="glide-lure" aria-hidden="true"><img src="{color_img('1', '16')}" alt=""></div>
     <div class="glide-copy wrap">
-      <p class="eyebrow">The action</p>
       <p class="glide-list"><span>Fast steady</span><span>Super slow steady</span><span>Side walk</span><span>Twitching</span><span>Heavy sweeps</span></p>
     </div>
   </div>
@@ -377,45 +375,19 @@ def home():
 
 {depth_module(GLIDEWAYS["176"], "Glideway 176")}
 
-<div id="film">{film("glideway-236", "glideway-236", "Glideway 236 — the big guy")}</div>
+<div id="film">{film("glideway-236", "glideway-236", "Glideway 236")}</div>
 
 <section class="parade">
-  <div class="wrap parade-head">
-    <div><p class="eyebrow" data-reveal>29 finishes on the 176</p><h2 class="h2" data-split>A colour for every mood of the water.</h2></div>
-    {btn("glideway-176.html#colours", "See the colour chart", "btn btn-ghost")}
+  <div class="wrap sec-head sec-head-row">
+    <h2 class="h2">Colours</h2>
+    <p>Up to 29 finishes per model. {btn("glideway-176.html#colours", "Colour chart", "btn btn-small")}</p>
   </div>
   <div class="parade-row" data-dir="1"><div class="parade-track">{row1}{row1}</div></div>
-  <div class="parade-row" data-dir="-1"><div class="parade-track">{row2}{row2}</div></div>
-</section>
-
-<section class="gear">
-  <div class="wrap">
-    <div class="sec-head"><p class="eyebrow" data-reveal>Beyond the bait</p><h2 class="h2" data-split>Gear up.</h2></div>
-    <div class="gear-grid">
-      <a class="gcard" href="accessories.html" data-reveal><div class="gcard-img"><img src="img/photos/spare-tail-2.webp" alt="" loading="lazy"></div><p class="gcard-n">01</p><h3>Accessories</h3><p>Spare Tails &amp; Lead Stickers — customise colour and buoyancy.</p>{ICONS['arrow']}</a>
-      <a class="gcard" href="sneak-attack-711.html" data-reveal><div class="gcard-img"><img src="img/posters/sneakattack.webp" alt="" loading="lazy"></div><p class="gcard-n">02</p><h3>Sneak Attack 711</h3><p>Toray 11,000T carbon, 1–3 oz, 14 titanium guides.</p>{ICONS['arrow']}</a>
-      <a class="gcard" href="apparel.html" data-reveal><div class="gcard-img"><img src="img/photos/flat-cap.webp" alt="" loading="lazy"></div><p class="gcard-n">03</p><h3>Apparel</h3><p>The Republic flat cap. Embroidered, breathable, one size.</p>{ICONS['arrow']}</a>
-    </div>
-  </div>
-</section>
-
-<section class="process" data-hscroll>
-  <div class="process-pin">
-    <div class="process-intro">
-      <p class="eyebrow">How our lures are born</p>
-      <h2 class="h2">From the garage<br>to the water.</h2>
-      <p>A mix of creativity and artisan skills.</p>
-      {btn("about.html", "Our story", "btn btn-ghost")}
-    </div>
-    <div class="process-view"><div class="process-track">{st}</div></div>
-  </div>
 </section>
 
 <section class="dealers-band">
-  <div class="wrap">
-    <p class="eyebrow" data-reveal>Worldwide</p>
-    <h2 class="h2" data-split>Fishing in 12 countries.</h2>
-    <ul class="country-cloud">{''.join(f'<li data-reveal>{c}</li>' for c in countries)}</ul>
+  <div class="wrap dealers-band-in">
+    <p><strong>Dealers in 6 countries</strong> — United States, France, Switzerland, Belgium, Spain, Portugal — and direct to tackle shops in 6 more.</p>
     {btn("dealers.html", "Find a dealer")}
   </div>
 </section>
@@ -433,7 +405,7 @@ def swimbaits():
         rows += f"""
   <article class="prow{' prow-rev' if i % 2 else ''}">
     <a class="prow-visual" href="glideway-{k}.html" aria-label="Glideway {k}">
-      <span class="prow-num" aria-hidden="true">{k}</span>
+      
       <img src="{color_img(g['pid'], g['hero'])}" alt="Glideway {k}" data-float>
     </a>
     <div class="prow-copy">
@@ -460,12 +432,11 @@ def swimbaits():
 </section>
 <section class="compare wrap">
   <p class="eyebrow" data-reveal>Side by side</p>
-  <h2 class="h2" data-split>Compare the family.</h2>
+  <h2 class="h2">Compare</h2>
   <div class="table-scroll" data-reveal><table>
     <thead><tr><th></th>{''.join(f'<th scope="col"><a href="glideway-{k}.html">Glideway {k}</a></th>' for k in ORDER)}</tr></thead>
     <tbody>{table}</tbody></table></div>
 </section>
-{marquee(["Garage designed", "Worldwide tested", "Slow floating", "Suspending", "Slow sinking"], "marquee-olive")}
 """
     return layout("swimbaits", "Swimbaits — Glideway 126, 176 & 236 | Swimbait Republic",
                   "The Glideway family: multi-species glide baits in 126, 176 and 236 sizes. Garage designed and worldwide tested.", body, "swimbaits")
@@ -494,7 +465,6 @@ def glideway(k):
     body = f"""
 <section class="pd-hero">
   <div class="pd-camo" aria-hidden="true"></div>
-  <p class="pd-ghost" aria-hidden="true">{k}</p>
   <div class="wrap pd-hero-inner">
     <a class="crumb" href="swimbaits.html">← Swimbaits</a>
     <p class="eyebrow">{g['kicker']}</p>
@@ -510,9 +480,9 @@ def glideway(k):
 <section class="pd-intro">
   <div class="wrap pd-intro-grid">
     <div>
-      <p class="pd-lede" data-words>{g['lede']}</p>
+      <p class="pd-lede">{g['lede']}</p>
     </div>
-    <div class="pd-body">{body_p}{retr}<blockquote data-reveal>“{g['quote']}”</blockquote></div>
+    <div class="pd-body">{body_p}{retr}</div>
   </div>
   <div class="wrap">{stats(g['stats'])}</div>
 </section>
@@ -525,7 +495,7 @@ def glideway(k):
 {depth_module(g, name)}
 
 <section class="specs wrap">
-  <div class="specs-head"><p class="eyebrow" data-reveal>Technical file</p><h2 class="h2" data-split>Specifications.</h2></div>
+  <div class="specs-head"><p class="eyebrow" data-reveal>Technical file</p><h2 class="h2">Specifications</h2></div>
   <dl class="spec-sheet">{specs}</dl>
   <div class="rig" data-reveal><p class="eyebrow">Rigging tip</p><p>{g['rig']}</p></div>
   {gear}
@@ -583,7 +553,6 @@ def accessories():
   </div>
 </section>
 
-{marquee(["Tune the colour", "Tune the depth", "Tune the cast"], "marquee-red")}
 
 <section class="acc wrap">
   <div class="acc-grid acc-grid-rev">
@@ -616,7 +585,7 @@ def rod():
 <section class="pd-intro">
   <div class="wrap">{stats([("7'11", '"', "Length"), ("1–3", "oz", "Lure range"), ("14", "", "Titanium guides"), ("200", "", "Reel size")])}</div>
   <div class="wrap pd-intro-grid">
-    <p class="pd-lede" data-words>Built with a Toray 11,000T carbon blank — extreme lightness, exceptional strength, and a weight-to-power ratio that's hard to match.</p>
+    <p class="pd-lede">Built with a Toray 11,000T carbon blank — extreme lightness, exceptional strength, and a weight-to-power ratio that's hard to match.</p>
     <div class="pd-body">
       <p data-reveal>Pair it with a size 200 reel for perfect balance and handling comfort. Its smooth, progressive action allows precise control of lighter lures while keeping the power to snap cast a 3 oz lure over long distances with complete confidence.</p>
       <p data-reveal>Unlike typical swimbait rods, it absorbs the excess energy of the cast instead of sending it to your elbow and shoulder — so you can keep bombing big baits all day long without pain or fatigue.</p>
@@ -630,8 +599,8 @@ def rod():
   <div class="wrap guides-grid">
     <div class="guides-big" aria-hidden="true"><span data-count="14">14</span><small>titanium guides</small></div>
     <div>
-      <p class="eyebrow" data-reveal>Guide system</p>
-      <h2 class="h2" data-split>Wind knots, virtually eliminated.</h2>
+      
+      <h2 class="h2">Guide system</h2>
       <p data-reveal>A guide layout engineered to channel line flow with maximum efficiency. The 14 titanium guides control every contact point and keep the line perfectly aligned, reducing friction and turbulence.</p>
       <p data-reveal>The short spacing between guides stops the line from forming loops or tangles during the cast or the retrieve. And the generous inner diameter lets leader knots pass with minimal friction, even with thick leaders.</p>
     </div>
@@ -642,7 +611,7 @@ def rod():
   <figure class="ph-small" data-reveal><div class="ph-clip"><img src="img/photos/barramundi.webp" alt="Angler with a large fish caught with the Sneak Attack 711" loading="lazy" data-parallax-img></div></figure>
 </section>
 <section class="specs wrap">
-  <div class="specs-head"><p class="eyebrow" data-reveal>Technical file</p><h2 class="h2" data-split>Specifications.</h2></div>
+  <div class="specs-head"><p class="eyebrow" data-reveal>Technical file</p><h2 class="h2">Specifications</h2></div>
   <dl class="spec-sheet"><div data-reveal><dt>Length</dt><dd>7'11"</dd></div><div data-reveal><dt>Lure range</dt><dd>1–3 oz</dd></div><div data-reveal><dt>Braid</dt><dd>15–30 lb</dd></div><div data-reveal><dt>Reel size</dt><dd>200</dd></div></dl>
 </section>
 {film("sneakattack", "sneakattack", "Sneak Attack 711")}
@@ -660,7 +629,7 @@ def rod():
 def apparel():
     feats = [("Embroidered logo", "on the central panel"), ("Printed visor", "Republic pattern underneath"), ("Breathable mesh", "keeps you cool"), ("Snapback", "adjustable, anti-rust closure"), ("One size", "fits most")]
     fl = "".join(f'<li data-reveal><strong>{a}</strong><span>{b}</span></li>' for a, b in feats)
-    body = page_hero("Category 04 · Apparel", "Apparel", "Wear the flag.", "img/photos/banner-4.webp") + f"""
+    body = page_hero("Category 04 · Apparel", "Apparel", "Caps and gear with the Republic logo.", "img/photos/banner-4.webp") + f"""
 <section class="acc wrap">
   <div class="acc-grid">
     <figure class="acc-photo" data-reveal><div class="ph-clip"><img src="img/photos/flat-cap.webp" alt="Swimbait Republic flat cap surrounded by Glideway lures" loading="lazy"></div></figure>
@@ -678,29 +647,28 @@ def apparel():
 
 
 def about():
-    body = page_hero("About us", "About the Republic", "Over 10 years of swimbait fishing, and a whole life dedicated to many other lure techniques.",
+    body = page_hero("About us", "About us", "Over 10 years of swimbait fishing, and a whole life dedicated to many other lure techniques.",
                      "img/photos/production.webp") + f"""
 <section class="manifesto manifesto-light">
   <div class="wrap">
-    <p class="manifesto-text" data-words>We put all our experience into our lures to help anglers catch bigger fish in an easier way — with the highest quality raw materials and handcraft work, for the best possible price, while ensuring good margins for all our business partners.</p>
+    <p class="manifesto-text">We put all our experience into our lures to help anglers catch bigger fish in an easier way — with the highest quality raw materials and handcraft work, for the best possible price, while ensuring good margins for all our business partners.</p>
   </div>
 </section>
 <section class="story wrap">
   <article class="story-row">
     <figure data-reveal><div class="ph-clip"><img src="img/photos/prototypes.webp" alt="Glideway prototypes at different stages" loading="lazy" data-parallax-img></div></figure>
-    <div><p class="step-n">01</p><h2 class="h2" data-split>How are our lures born?</h2><p data-reveal>First a concept or an idea clicks in our brain. Then comes the draw, after that a wooden prototype, and finally a lot of resin prototypes to try every possible weight configuration, bait thickness… This process is a mix of creativity and artisan skills.</p></div>
+    <div><p class="step-n">01</p><h2 class="h2">How are our lures born?</h2><p data-reveal>First a concept or an idea clicks in our brain. Then comes the draw, after that a wooden prototype, and finally a lot of resin prototypes to try every possible weight configuration, bait thickness… This process is a mix of creativity and artisan skills.</p></div>
   </article>
   <article class="story-row story-rev">
     <figure data-reveal><div class="ph-clip"><img src="img/photos/testing.webp" alt="Angler with a large bass during field testing" loading="lazy" data-parallax-img></div></figure>
-    <div><p class="step-n">02</p><h2 class="h2" data-split>Testing.</h2><p data-reveal>One of the most important parts of the process: even if the lure swims great in the tank, we have to make sure it performs in different conditions and scenarios — and that fish love it!</p>
+    <div><p class="step-n">02</p><h2 class="h2">Testing</h2><p data-reveal>One of the most important parts of the process: even if the lure swims great in the tank, we have to make sure it performs in different conditions and scenarios — and that fish love it!</p>
     <p class="big-fact" data-reveal><span data-count="2">2</span> years<small>of field testing, at most, before a release</small></p></div>
   </article>
   <article class="story-row">
     <figure data-reveal><div class="ph-clip"><img src="img/photos/bass-reeds.webp" alt="Big black bass caught on a Glideway" loading="lazy" data-parallax-img></div></figure>
-    <div><p class="step-n">03</p><h2 class="h2" data-split>Production.</h2><p data-reveal>Having an amazing bait means nothing to us if we can't make it available for everybody. We travel the world to find high quality factories to produce our creations, and we personally supervise the whole process — from shell injection to packing — to make sure everything reaches the quality level we aim for.</p></div>
+    <div><p class="step-n">03</p><h2 class="h2">Production</h2><p data-reveal>Having an amazing bait means nothing to us if we can't make it available for everybody. We travel the world to find high quality factories to produce our creations, and we personally supervise the whole process — from shell injection to packing — to make sure everything reaches the quality level we aim for.</p></div>
   </article>
 </section>
-{marquee(["Concept", "Draw", "Wood", "Resin", "Test", "Produce"], "marquee-olive")}
 <section class="upsell wrap">
   <a class="upsell-card" href="swimbaits.html" data-reveal>
     <img src="img/photos/glideway-sunset.webp" alt="" loading="lazy">
@@ -723,7 +691,7 @@ def dealers():
   <p class="eyebrow" data-reveal>Official distributors</p>
   <div class="dgrid">{cards}</div>
   <div class="direct">
-    <div><p class="eyebrow" data-reveal>Direct to tackle shops</p><h2 class="h2" data-split>No dealer in your country yet?</h2>
+    <div><h2 class="h2">Direct to tackle shops</h2>
     <p data-reveal>In these countries we work directly with tackle shops. Shop owner or angler, get in touch.</p>{btn("contact.html", "Contact us")}</div>
     <ul class="direct-list">{direct}</ul>
   </div>
@@ -733,7 +701,7 @@ def dealers():
 
 
 def contact():
-    body = page_hero("Contact", "Talk to us", "Have a question or a comment for our team? We'd love to hear from you.", "img/photos/glideway-126-branch.webp") + f"""
+    body = page_hero("Contact", "Contact us", "Have a question or a comment for our team? We'd love to hear from you.", "img/photos/glideway-126-branch.webp") + f"""
 <section class="contact wrap">
   <form class="cform" data-reveal novalidate>
     <label><span>Name</span><input name="name" required autocomplete="name"></label>

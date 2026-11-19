@@ -48,8 +48,6 @@
     if (!nav) return;
     nav.classList.toggle("is-solid", y > 40);
     var menuOpen = menu && menu.classList.contains("is-open");
-    nav.classList.toggle("is-hidden", !menuOpen && y > 400 && y > lastY + 2);
-    if (y < lastY - 2) nav.classList.remove("is-hidden");
     lastY = y;
   }
   if (burger && menu) {
@@ -99,7 +97,7 @@
     // the S-curve of a glide bait: alternating headings while it crosses
     var phase = p * Math.PI * 5;
     var rot = Math.sin(phase) * 16;
-    var y = Math.sin(phase) * 40 - 0;
+    var y = Math.sin(phase) * 30;
     glideLure.style.transform = "translate(" + x + "px, calc(-50% + " + y + "px)) rotate(" + rot + "deg)";
     var n = Math.floor(p * (glideWords.length + 0.6));
     glideWords.forEach(function (w, i) { w.classList.toggle("on", i < n); w.classList.toggle("cur", i === n - 1); });
@@ -283,11 +281,8 @@
     // home hero: video frame shrinks into a card, title drifts up
     var hero = $("[data-hero]");
     if (hero) {
-      gsap.from(".hero-foot, .hero-eyebrow", { opacity: 0, y: 30, duration: 1.2, delay: 0.8, ease: "power3.out", stagger: 0.1 });
-      var tl = gsap.timeline({ scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
-      tl.to(".hero-media", { clipPath: "inset(6% 4% 10% 4%)", scale: 0.96, ease: "none" }, 0)
-        .to(".hero-title", { yPercent: -40, opacity: 0.2, ease: "none" }, 0)
-        .to(".hero-foot", { y: -60, opacity: 0, ease: "none" }, 0);
+      gsap.from(".hero-eyebrow, .hero .lede, .hero-ctas", { opacity: 0, y: 24, duration: 1, delay: 0.6, ease: "power3.out", stagger: 0.1 });
+      gsap.to(".hero-media", { yPercent: 18, ease: "none", scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true } });
     }
 
     // inner heroes: parallax background
@@ -306,8 +301,7 @@
     var pdl = $(".pd-lure img");
     if (pdl) {
       gsap.from(pdl, { xPercent: -60, rotate: -12, opacity: 0, duration: 1.6, ease: "power3.out", delay: 0.3 });
-      gsap.to(".pd-ghost", { yPercent: -30, ease: "none", scrollTrigger: { trigger: ".pd-hero", start: "top top", end: "bottom top", scrub: true } });
-      gsap.to(".pd-lure", { yPercent: 25, scale: 0.9, ease: "none", scrollTrigger: { trigger: ".pd-hero", start: "top top", end: "bottom top", scrub: true } });
+      gsap.to(".pd-lure", { yPercent: 12, ease: "none", scrollTrigger: { trigger: ".pd-hero", start: "top top", end: "bottom top", scrub: true } });
     }
     // swimbaits list: lures float into place
     $$("[data-float]").forEach(function (img) {
@@ -347,7 +341,6 @@
     }
 
     // footer giant word
-    gsap.from(".footer-word", { yPercent: 60, opacity: 0, duration: 1.4, ease: "power3.out", scrollTrigger: { trigger: ".footer", start: "top 80%" } });
 
     window.addEventListener("load", function () { ST.refresh(); });
   }

@@ -7,11 +7,11 @@ Clément mène ce projet **seul**.
 
 Objectif de la refonte : donner une vraie personnalité (registre « République » militaire / carnet de terrain), un vrai parcours au scroll, une page par produit, plus visuel.
 
-## Charte (reprise du site actuel, vérifiée par capture)
+## Charte = celle du site actuel (demande de Clément, 2026-11-19)
 
-- Vert olive `#3e4939`, vert sauge `#77916b`, kaki `#c8c8b1`, fond camo (`img/brand/camo.webp`)
-- Rouge du logo `#ff0129`, rouge bordeaux des titres `#a51632`
-- Polices : Barlow Condensed (titres), Barlow (texte), **Black Ops One** (noms produits, déjà utilisée sur leurs fiches). Ajout : JetBrains Mono pour les petites étiquettes « fiche technique ».
+Relevée dans leur CSS : fond clair `#f8f8f8` / blanc, vert olive `#3e4939` (en-tête avec leur image camo `img/brand/header.webp`, pied de page, boutons, bandeaux specs), kaki `#c8c8b1` / `#cdd5c6`, rouge `#c10e2f` / `#a51632` en petite touche. Polices : Barlow Condensed, Barlow, Black Ops One (noms produits). Tableaux de specs au format de leurs fiches (en-tête olive, cellules grises). Les dessins de catégories de l'accueil sont les leurs (`img/brand/cat-*.webp`).
+
+Retours de Clément sur la V1 (sombre, très longue) : trop long, couleurs pas les leurs, trop de grosses phrases. V2 : pages environ deux fois plus courtes, titres sobres, plus de bandeaux défilants ni de slogans géants. **À garder absolument** : les animations qui expliquent le leurre (gamme à l'échelle, nage en S au scroll, module de profondeur Lead Stickers, nuancier cliquable, leurre animé en tête de fiche).
 
 ## Structure
 
