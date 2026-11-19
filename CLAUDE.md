@@ -18,7 +18,7 @@ Retours de Clément sur la V1 (sombre, très longue) : trop long, couleurs pas l
 ```
 build.py            TOUT le contenu (textes, specs, coloris, revendeurs) + gabarits → génère les .html
                     Ne pas éditer les .html à la main : modifier build.py puis  python3 build.py
-index.html          accueil (vidéo plein écran, manifeste, famille à l'échelle, scène « glide », profondeur, film, coloris, gear, processus horizontal, pays)
+index.html          accueil (vidéo, 4 catégories, gamme à l'échelle, nage en S, profondeur, film, coloris, revendeurs)
 swimbaits.html      les 3 Glideway + tableau comparatif
 glideway-126/176/236.html   fiche produit (hero, specs, module profondeur interactif, film, nuancier cliquable)
 accessories.html    Spare Tail (11 coloris) + Lead Stickers (« quand les ajouter »)
