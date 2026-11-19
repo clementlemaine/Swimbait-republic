@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1346"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1348"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["es", "en", "fr"]          # l'espagnol est la langue par défaut (pages sans suffixe)
 DEFAULT = "es"
 CUR = {"lang": DEFAULT}
@@ -282,6 +282,7 @@ def layout(slug, title, desc, body, section=""):
 <meta property="og:site_name" content="Swimbait Republic">
 <meta property="og:image" content="img/posters/hero.webp">
 <meta name="theme-color" content="#3e4939">
+<meta name="robots" content="noindex, nofollow">  <!-- prototype : ne pas apparaître dans Google -->
 {alt}
 <link rel="icon" type="image/png" href="img/brand/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
