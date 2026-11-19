@@ -16,7 +16,7 @@
   window.addEventListener("pageshow", function () { requestAnimationFrame(curtainOut); });
   document.addEventListener("click", function (ev) {
     var a = ev.target.closest && ev.target.closest("a[href]");
-    if (!a || !curtain || reduced) return;
+    if (ev.defaultPrevented || !a || !curtain || reduced) return;
     var href = a.getAttribute("href");
     if (!href || href.charAt(0) === "#" || a.target === "_blank" || /^(mailto:|tel:|https?:)/.test(href) || ev.metaKey || ev.ctrlKey || ev.shiftKey) return;
     if (href.split("#")[0] === "") return;
@@ -299,6 +299,15 @@
     mp.remove();
   }
 
+
+  // ------------------------------------------------ "Volver" button on product pages
+  $$("[data-back]").forEach(function (b) {
+    b.addEventListener("click", function (e) {
+      var fromSite = document.referrer && document.referrer.indexOf(location.host) !== -1;
+      if (fromSite && history.length > 1) { e.preventDefault(); history.back(); }
+    });
+  });
+
   // ------------------------------------------------ main scroll loop
   function onScroll(y) { onScrollProgress(y); onScrollHero(y); }
 
@@ -321,10 +330,26 @@
     } else {
       window.addEventListener("scroll", function () { onScroll(window.scrollY); }, { passive: true });
     }
-    // reload always starts from the top of the page
-    window.scrollTo(0, 0); if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true, force: true });
-    window.addEventListener("pageshow", function (ev) { if (ev.persisted) { window.scrollTo(0, 0); if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true, force: true }); } });
-    onScroll(0);
+    // reload -> top of the page ; coming back (browser back or our "Volver" button) -> exactly where you were
+    var KEY = "sr-pos:" + location.pathname;
+    var navType = (performance.getEntriesByType && performance.getEntriesByType("navigation")[0] || {}).type;
+    var saved = null;
+    try { saved = JSON.parse(sessionStorage.getItem(KEY) || "null"); } catch (e) {}
+    function goTo(y) { window.scrollTo(0, y); if (window.__lenis) window.__lenis.scrollTo(y, { immediate: true, force: true }); }
+    if (navType === "back_forward" && saved) {
+      if (saved.tab) { var tb = $('.rtab[data-k="' + saved.tab + '"]'); if (tb) tb.click(); }
+      if (saved.model) { var cb = $('.ctab[data-model="' + saved.model + '"]'); if (cb && !cb.classList.contains("is-on")) cb.click(); }
+      requestAnimationFrame(function () { goTo(saved.y); setTimeout(function () { goTo(saved.y); if (window.ScrollTrigger) window.ScrollTrigger.refresh(); }, 350); });
+    } else {
+      goTo(0);
+    }
+    function savePos() {
+      var on = $(".rtab.is-on"), cm = $(".ctab.is-on");
+      try { sessionStorage.setItem(KEY, JSON.stringify({ y: window.__lenis ? window.__lenis.scroll : window.scrollY, tab: on && on.dataset.k, model: cm && cm.dataset.model })); } catch (e) {}
+    }
+    window.addEventListener("pagehide", savePos);
+    document.addEventListener("click", function (ev) { if (ev.target.closest && ev.target.closest("a[href]")) savePos(); }, true);
+    onScroll(window.scrollY);
     if (hasGsap && !reduced) animateWithGsap(); else fallbackReveal();
   }
 

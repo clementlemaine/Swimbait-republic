@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1258"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1331"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["es", "en", "fr"]          # l'espagnol est la langue par défaut (pages sans suffixe)
 DEFAULT = "es"
 CUR = {"lang": DEFAULT}
@@ -483,14 +483,15 @@ def home():
       <div class="rpanel" role="tabpanel" id="panel-{k}" aria-labelledby="tab-{k}" data-k="{k}" data-depth-module{'' if on else ' hidden'}>
         <div class="rpanel-info">
           <p class="eyebrow">{_(g['kicker'])}</p>
-          <h3 class="stencil">Glideway {k}</h3>
+          <h3 class="stencil"><a href="{url(f'glideway-{k}')}">Glideway {k}</a></h3>
           <p>{_(g['lede'])}</p>
+          {btn(url(f'glideway-{k}'), L(f'See the Glideway {k}', f'Voir le Glideway {k}', f'Ver el Glideway {k}'), 'btn btn-red btn-big')}
           {spec_list(g['specs'], 'mini-specs')}
           <div class="rpanel-sticks">
             <p class="rstep"><span>2</span>{_(L('Add Lead Stickers and watch it sink', 'Ajoutez des Lead Stickers et regardez-le couler', 'Añade Lead Stickers y mira cómo se hunde'))}</p>
             {depth_parts(g)[1]}
           </div>
-          {btn(url(f'glideway-{k}'), L(f'Discover the Glideway {k}', f'Voir le Glideway {k}', f'Ver el Glideway {k}'))}
+          {btn(url(f'glideway-{k}'), L(f'All about the Glideway {k}', f'Tout sur le Glideway {k}', f'Todo sobre el Glideway {k}'), 'btn btn-red btn-big')}
         </div>
         <div class="rpanel-depth">{depth_parts(g)[0]}
         </div>
@@ -682,7 +683,7 @@ def glideway(k):
     body = f"""
 <section class="pd-hero">
   <div class="wrap pd-hero-inner">
-    <a class="crumb" href="{url('swimbaits')}">← Swimbaits</a>
+    <div class="pd-back"><a class="back-btn" href="{url('index')}" data-back>← {_(L('Back', 'Retour', 'Volver'))}</a><a class="crumb" href="{url('swimbaits')}">Swimbaits</a><span class="crumb-sep">/</span><span class="crumb-cur">{name}</span></div>
     <p class="eyebrow">{_(g['kicker'])}</p>
     <h1 class="stencil pd-title" data-split>{name}</h1>
     {views_block(k, g, name)}

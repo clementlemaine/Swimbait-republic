@@ -38,6 +38,10 @@ Sous le titre de chaque fiche, il y a 6 boutons : Profil · Face · Autre côté
 Seul le profil a une vraie photo (le coloris détouré). Les 5 autres affichent « Photo à venir », car le client n'a pas ces photos.
 **Pour les ajouter :** déposer `img/views/<126|176|236>/<face|autre-cote|dessus|dessous|arriere>.webp` (fond blanc ou détouré), puis `python3 build.py`. La photo remplace automatiquement « Photo à venir ». **Ne pas générer ni dessiner ces vues.**
 
+**État des vues (2026-11-19) :** Glideway 176 = profil (vraie photo), autre côté (vraie photo en miroir), face / dessus / dessous (générées par Nano Banana Pro à partir de la vraie photo, **à faire valider par le client avant mise en ligne**), arrière = « photo à venir » (génération ratée, mise de côté dans `_scrape/gen/rejet/`). 126 et 236 : seulement le profil. Script : `tools/prepare_views.py`. Coût Gemini engagé : 4 images 2K, environ 0,55 $.
+
+**Retour arrière :** sur les fiches, bouton rouge « ← Volver » ; le bouton retour du navigateur ramène aussi au même endroit, avec la même taille choisie (position gardée en sessionStorage). Le rechargement repart en haut.
+
 ## Règles
 
 - **Ne rien inventer.** Tous les textes, specs, coloris et revendeurs viennent du site actuel. Seules des fautes d'anglais évidentes ont été corrigées (« it's » → « is », « addind », etc.). Les titres d'accroche (« Pick your poison », « Big baits. Bigger bites. », « Dial in your depth ») sont du ton éditorial, pas des affirmations.

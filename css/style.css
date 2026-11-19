@@ -867,3 +867,19 @@ html { overflow-x: clip; }
 @media (max-width: 480px) { .rpanel-sticks .depth-btns { grid-template-columns: 1fr; } }
 .depth-btns .depth-btn.is-on[data-depth="0"] .depth-n::before, .depth-btns .depth-btn.is-on[data-depth="0"] .depth-n::after,
 .depth-btns .depth-btn.is-on[data-depth="1"] .depth-n::after { background: transparent !important; border: 2px dashed #fff !important; }
+
+/* boutons rouges bien visibles + retour sur les fiches */
+.btn-red { background: var(--red); color: #fff; box-shadow: 0 8px 20px rgba(193,14,47,.28); }
+.btn-red:hover, .btn-red:focus-visible { background: #fff; color: var(--red); box-shadow: inset 0 0 0 3px var(--red); }
+.btn-big { height: 58px; padding: 0 1.5rem 0 1.6rem; font-size: 1.2rem; }
+.btn-big svg { width: 22px; height: 22px; }
+.rpanel-info > .btn-red { margin: .2rem 0 1.4rem; }
+.rpanel-info h3 a { color: inherit; text-decoration: none; background: linear-gradient(var(--red), var(--red)) 0 100% / 0 3px no-repeat; transition: background-size .35s var(--ease); }
+.rpanel-info h3 a:hover { background-size: 100% 3px; }
+.pd-back { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; margin-bottom: .9rem; }
+.back-btn { display: inline-flex; align-items: center; height: 42px; padding: 0 1.1rem; background: var(--red); color: #fff; border-radius: 999px;
+  font: 800 1.05rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .05em; box-shadow: 0 6px 16px rgba(193,14,47,.3); transition: background .25s, color .25s, transform .25s var(--ease); }
+.back-btn:hover { background: #fff; color: var(--red); box-shadow: inset 0 0 0 2px var(--red); transform: translateX(-3px); }
+.pd-back .crumb { margin: 0; }
+.crumb-sep { color: var(--line); }
+.crumb-cur { font: 700 .8rem var(--f-body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
