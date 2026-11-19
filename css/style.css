@@ -774,3 +774,53 @@ html { overflow-x: clip; }
 .vtab.is-on { background: var(--olive); border-color: var(--olive); color: #fff; }
 .vtab.is-on .vtab-thumb svg { color: var(--khaki); }
 @media (max-width: 700px) { .views-tabs { grid-template-columns: repeat(3, 1fr); } .vtab { font-size: .82rem; } }
+
+/* =========================================================
+   Détails rouge & blanc de la marque
+   ========================================================= */
+/* en-tête : bouton Contacto rouge, survols et langue active soulignés en rouge */
+.nav-cta { background: var(--red); border: 2px solid #fff; color: #fff; }
+.nav-cta:hover { background: #fff; color: var(--red); border-color: #fff; }
+.nav-links a::after { background: var(--red); height: 3px; }
+.nav-links a:hover, .nav-links a[aria-current] { color: #fff; }
+.lang a[aria-current] { border-bottom-color: var(--red); }
+.nav { border-bottom: 3px solid var(--red); }
+/* menu mobile : dernier lien (Contacto) en bouton rouge */
+.menu li:last-child a { color: #fff; background: var(--red); padding: .2rem .8rem; margin-top: .6rem; display: inline-flex; }
+.menu li small { color: #fff; }
+
+/* petites étiquettes : trait rouge devant */
+.eyebrow::before { content: ""; display: inline-block; width: 22px; height: 3px; background: var(--red); vertical-align: middle; margin-right: .6rem; position: relative; top: -2px; }
+.rstep span { background: var(--red); }
+
+/* boutons d'action principaux en rouge et blanc */
+.dealers-band .btn, .pcard-go, .cform .btn, .acc-copy .btn { background: var(--red); color: #fff; }
+.dealers-band .btn:hover, .cform .btn:hover, .acc-copy .btn:hover { background: #fff; color: var(--red); box-shadow: inset 0 0 0 2px var(--red); }
+.pcard:hover .pcard-go { background: #fff; color: var(--red); }
+.dealers-band { border-top: 4px solid var(--red); }
+.dealers-band strong { color: var(--red); }
+
+/* fiches : trait rouge sous le titre, fil d'Ariane et lecture du film */
+.pd-title { border-bottom: 3px solid var(--red); }
+.crumb { color: var(--red); }
+.crumb:hover { color: var(--olive); }
+.film-btn { background: var(--red); box-shadow: 0 0 0 4px #fff; }
+.depth-tag { background: var(--red); }
+.spec-sheet dt { border-top: 3px solid var(--red); }
+.compare thead th { border-top: 3px solid var(--red); }
+.swatch.is-on, .cv-item.is-on { border-color: var(--red); }
+.cv-item.is-on span, .swatch.is-on span { color: var(--red); }
+.ctab.is-on { background: var(--red); border-color: var(--red); color: #fff; }
+.cv-arrow { background: var(--red); color: #fff; }
+.cv-arrow:hover { background: var(--olive); }
+.dcard { border-top-color: var(--red); }
+.dcode { background: var(--red); color: #fff; }
+.whens li { border-top-color: var(--red); }
+.rig, .gear-rec { border-left-color: var(--red); }
+
+/* pied de page : bande rouge en haut, titres blancs soulignés de rouge, réseaux rouges au survol */
+.footer { border-top: 5px solid var(--red); }
+.footer-h { color: #fff; display: inline-block; border-bottom: 2px solid var(--red); padding-bottom: .2rem; margin-bottom: .6rem; }
+.footer .social a:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.footer-bottom { background: var(--red); color: #fff; border-top: 0; }
+.footer-bottom .ver { color: #fff; }
