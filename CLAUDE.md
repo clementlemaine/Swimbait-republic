@@ -16,25 +16,20 @@ Retours de Clément sur la V1 (sombre, très longue) : trop long, couleurs pas l
 ## Structure
 
 ```
-build.py            TOUT le contenu (textes, specs, coloris, revendeurs) + gabarits → génère les .html
-                    Ne pas éditer les .html à la main : modifier build.py puis  python3 build.py
-index.html          accueil (vidéo, 4 catégories, gamme à l'échelle, nage en S, profondeur, film, coloris, revendeurs)
-swimbaits.html      les 3 Glideway + tableau comparatif
-glideway-126/176/236.html   fiche produit (hero, specs, module profondeur interactif, film, nuancier cliquable)
-accessories.html    Spare Tail (11 coloris) + Lead Stickers (« quand les ajouter »)
-sneak-attack-711.html   canne
-apparel.html        casquette
-about.html, dealers.html, contact.html
-css/style.css       tout le design ; couleurs dans :root
-js/app.js           défilement fluide (Lenis), animations au scroll (GSAP ScrollTrigger, CDN), nuanciers, films, menu
-img/colors/<id>/    photos de coloris DÉTOURÉES (fond blanc retiré) — générées par tools/prepare_assets.py
-img/photos, img/posters, img/brand   photos du client converties en webp
-media/              vidéos ré-encodées (720p, 8–12 Mo) + hero-loop.mp4 (20 s de la vidéo 236, sans son)
-tools/prepare_assets.py   reconvertit/détoure les images depuis _scrape/
-_scrape/            copie brute du site actuel (ignoré par git)
+build.py            TOUT le contenu en 3 langues, sous la forme L("anglais", "français", "espagnol") + gabarits.
+                    Ne pas éditer les .html à la main : modifier build.py puis  python3 build.py  (33 pages)
+Langues             anglais = index.html, glideway-176.html … ; français = index-fr.html, glideway-176-fr.html … ;
+                    espagnol = index-es.html … (fichiers à la racine, pas de dossiers : Safari bloque les chemins ../ en local)
+                    Sélecteur EN / FR / ES dans l'en-tête, qui renvoie vers la même page dans l'autre langue.
+Accueil             vidéo (reste en place) + barre des 4 catégories → le panneau « gamme » glisse par-dessus avec un vrai
+                    Glideway 176 (Galaxy Mirror, « GLIDEWAY 176 » imprimé) qui traverse → onglets 126/176/236 + bac de
+                    profondeur Lead Stickers → carrousel des coloris par modèle → grandes cartes produits → film → revendeurs
+glideway-126/176/236   fiche produit (hero, specs, profondeur, film, nuancier cliquable)
+css/style.css, js/app.js, img/, media/, tools/prepare_assets.py, _scrape/ (ignoré par git)
 ```
 
-Les animations dépendent de GSAP/Lenis (cdnjs / unpkg). Si les CDN ne chargent pas, le site reste lisible (repli sans animations).
+Abandonné à la demande de Clément (2026-11-19) : la vue du dessus dessinée du leurre (forme pas fidèle). **Ne jamais dessiner le leurre** : uniquement les vraies photos détourées.
+Le français et l'espagnol sont des traductions faites par Claude : à faire relire par le client (vocabulaire pêche : flottant lent / coulant lent, flotante lento / hundimiento lento).
 
 ## Règles
 
