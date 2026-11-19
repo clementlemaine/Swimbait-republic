@@ -888,4 +888,4 @@ html { overflow-x: clip; }
 .pd-lure img, .view-img { animation: none !important; transform: none !important; }
 
 /* vue du dessus (photo client, petite) : taille limitée pour rester nette */
-.view[data-view="dessus"] .view-img { width: min(88%, 640px); max-height: none; }
+/* (limite de taille retirée : la vue du dessus est maintenant en haute définition) */

@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1335"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1341"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["es", "en", "fr"]          # l'espagnol est la langue par défaut (pages sans suffixe)
 DEFAULT = "es"
 CUR = {"lang": DEFAULT}
