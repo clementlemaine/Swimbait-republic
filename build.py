@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1234"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1236"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
