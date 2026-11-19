@@ -696,3 +696,16 @@ html { overflow-x: clip; }
 .mprev.is-open .mprev-btn { background: #fff; color: var(--red); border-color: var(--red); animation: none; }
 .mprev-btn::after { background: var(--red); color: #fff; }
 @keyframes mprev-pulse { 0% { box-shadow: 0 8px 24px rgba(0,0,0,.3), 0 0 0 0 rgba(193,14,47,.55); } 70%, 100% { box-shadow: 0 8px 24px rgba(0,0,0,.3), 0 0 0 16px rgba(193,14,47,0); } }
+
+/* barre des produits : plus grande et plus visible */
+.hero-cats { margin-top: clamp(1.4rem, 4vh, 2.4rem); border-top-width: 4px; box-shadow: 0 16px 40px rgba(0,0,0,.45); }
+.hcat { gap: 1rem; padding: 1.25rem 1.3rem; min-height: 104px; }
+.hcat img { width: 96px; height: 64px; }
+.hcat b { font-size: clamp(1.45rem, 2vw, 1.85rem); }
+.hcat small { font-size: .95rem; }
+.hcat > svg { width: 24px; }
+@media (max-width: 1200px) { .hcat img { width: 72px; height: 48px; } .hcat { padding: 1rem; } }
+@media (max-width: 900px) { .hcat { min-height: 76px; padding: .9rem .9rem; } .hcat b { font-size: 1.3rem; } .hcat small { font-size: .82rem; } }
+.hcat small { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.25; }
+.hcat img { width: 84px; height: 56px; }
+@media (max-width: 1200px) { .hcat img { display: none; } }
