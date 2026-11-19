@@ -420,8 +420,6 @@
       gsap.fromTo(im, { yPercent: -8 }, { yPercent: 0, ease: "none", scrollTrigger: { trigger: im.parentNode, start: "top bottom", end: "bottom top", scrub: true } });
     });
 
-    var pdl = $(".pd-lure img");
-    if (pdl) gsap.from(pdl, { xPercent: -60, rotate: -12, opacity: 0, duration: 1.5, ease: "power3.out", delay: 0.2 });
     $$("[data-float]").forEach(function (im) {
       gsap.fromTo(im, { xPercent: -25, rotate: -8, opacity: 0 }, { xPercent: 0, rotate: 0, opacity: 1, duration: 1.3, ease: "power3.out", scrollTrigger: { trigger: im, start: "top 85%" } });
     });

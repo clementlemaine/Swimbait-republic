@@ -883,3 +883,6 @@ html { overflow-x: clip; }
 .pd-back .crumb { margin: 0; }
 .crumb-sep { color: var(--line); }
 .crumb-cur { font: 700 .8rem var(--f-body); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+
+/* fiche produit : le leurre du haut reste immobile (demande de Clément) */
+.pd-lure img, .view-img { animation: none !important; transform: none !important; }
