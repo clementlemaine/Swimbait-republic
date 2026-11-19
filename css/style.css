@@ -886,3 +886,6 @@ html { overflow-x: clip; }
 
 /* fiche produit : le leurre du haut reste immobile (demande de Clément) */
 .pd-lure img, .view-img { animation: none !important; transform: none !important; }
+
+/* vue du dessus (photo client, petite) : taille limitée pour rester nette */
+.view[data-view="dessus"] .view-img { width: min(88%, 640px); max-height: none; }
