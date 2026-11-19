@@ -83,24 +83,62 @@
     });
   }
 
-  // ------------------------------------------------ glide scene (home)
+  // ------------------------------------------------ glide scene (home) — top view
   var glide = $("[data-glide]");
-  var glideLure = glide && $(".glide-lure", glide);
-  var glideWords = glide ? $$(".glide-list span", glide) : [];
+  var G = null;
+  if (glide && $(".glide-svg", glide)) {
+    G = {
+      fish: $(".glide-fish", glide), tail: $(".glide-tail", glide), trail: $(".glide-trail", glide),
+      line: $(".glide-line", glide), ripples: $(".glide-ripples", glide), cap: $(".glide-cap-text", glide),
+      steps: $$(".glide-steps li", glide), lastDir: 0, lastStep: -1
+    };
+  }
+  var SWIM = 0.8;                       // share of the scroll spent swimming, the rest is the stop
+  function gPos(T) {                    // T: 0..1 along the swim
+    var env = Math.min(1, T / 0.08);
+    return { x: 200 - 108 * Math.sin(T * Math.PI * 3.5) * env, y: 650 - T * 470 };
+  }
+  function gAngle(T) {
+    var e = 0.004, a = gPos(Math.max(0, T - e)), b = gPos(Math.min(1, T + e));
+    return Math.atan2(b.x - a.x, -(b.y - a.y)) * 180 / Math.PI;
+  }
+  function addRipple(x, y) {
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    c.setAttribute("cx", x.toFixed(1)); c.setAttribute("cy", y.toFixed(1)); c.setAttribute("r", "34");
+    G.ripples.appendChild(c);
+    setTimeout(function () { if (c.parentNode) c.parentNode.removeChild(c); }, 1700);
+  }
   function onScrollGlide() {
-    if (!glide || !glideLure) return;
+    if (!G) return;
     var r = glide.getBoundingClientRect();
     var total = r.height - window.innerHeight;
     var p = Math.max(0, Math.min(1, -r.top / total));
-    var vw = window.innerWidth, lw = glideLure.offsetWidth;
-    var x = -lw + p * (vw + lw * 2) - lw * 0.5;
-    // the S-curve of a glide bait: alternating headings while it crosses
-    var phase = p * Math.PI * 5;
-    var rot = Math.sin(phase) * 16;
-    var y = Math.sin(phase) * 30;
-    glideLure.style.transform = "translate(" + x + "px, calc(-50% + " + y + "px)) rotate(" + rot + "deg)";
-    var n = Math.floor(p * (glideWords.length + 0.6));
-    glideWords.forEach(function (w, i) { w.classList.toggle("on", i < n); w.classList.toggle("cur", i === n - 1); });
+    var T = Math.min(1, p / SWIM);
+    var pos = gPos(T), ang = gAngle(T), tailRel = (gAngle(Math.max(0, T - 0.04)) - ang) * 1.25;
+    var stop = p > SWIM ? (p - SWIM) / (1 - SWIM) : 0;
+    if (stop > 0) {                     // settles: slows down, straightens, nose up
+      var k = 1 - Math.pow(1 - stop, 3);
+      ang = ang * (1 - k); tailRel = tailRel * (1 - k);
+      pos = { x: pos.x + (200 - pos.x) * k * 0.25, y: pos.y - 18 * k };
+    }
+    tailRel = Math.max(-55, Math.min(55, tailRel));
+    G.fish.setAttribute("transform", "translate(" + pos.x.toFixed(1) + " " + pos.y.toFixed(1) + ") rotate(" + ang.toFixed(1) + ") scale(1.55)");
+    G.tail.setAttribute("transform", "rotate(" + tailRel.toFixed(1) + ")");
+    var rad = ang * Math.PI / 180;
+    G.line.setAttribute("x2", (pos.x + 119 * Math.sin(rad)).toFixed(1));
+    G.line.setAttribute("y2", (pos.y - 119 * Math.cos(rad)).toFixed(1));
+    var d = "", n = Math.max(1, Math.round(T * 160));
+    for (var i = 0; i <= n; i++) { var q = gPos(T * i / n); d += (i ? " L" : "M") + q.x.toFixed(1) + " " + q.y.toFixed(1); }
+    G.trail.setAttribute("d", d);
+    var dir = gPos(Math.min(1, T + 0.01)).x - gPos(T).x < 0 ? -1 : 1;
+    if (G.lastDir && dir !== G.lastDir && T > 0.02 && T < 1) addRipple(pos.x, pos.y);
+    G.lastDir = dir;
+    var step = stop > 0.15 ? 2 : (dir < 0 ? 0 : 1);
+    if (step !== G.lastStep) {
+      G.lastStep = step;
+      G.cap.textContent = ["Glide left", "Glide right", "On the stop"][step];
+      G.steps.forEach(function (li, i) { li.classList.toggle("on", i === step); });
+    }
   }
 
   // ------------------------------------------------ counters

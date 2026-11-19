@@ -7,7 +7,7 @@ import html
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1158"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1204"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 
 # ---------------------------------------------------------------- DATA
 
@@ -336,6 +336,83 @@ def home():
   </div>
 </section>
 
+<section class="glide" data-glide aria-labelledby="glide-title">
+  <div class="glide-sticky">
+    <div class="wrap glide-grid">
+      <div class="glide-text">
+        <p class="eyebrow">Glide action · seen from above</p>
+        <h2 class="h2" id="glide-title">How the Glideway swims</h2>
+        <p>Every turn of the handle or twitch of the rod sends the lure gliding to one side, then to the other, in a wide S. On the stop it settles in a natural position.</p>
+        <ol class="glide-steps">
+          <li data-step="0"><b>Glide left</b><span>the head turns and the body slides sideways</span></li>
+          <li data-step="1"><b>Glide right</b><span>the joint flexes, it swings back the other way</span></li>
+          <li data-step="2"><b>On the stop</b><span>it sits natural, nose up, ready for the bite</span></li>
+        </ol>
+        <figure class="glide-real">
+          <video src="media/glide-top-real.mp4" poster="img/posters/glide-top-real.webp" autoplay muted loop playsinline preload="metadata"></video>
+          <figcaption>Real footage from above — Glideway 176 (slowed down)</figcaption>
+        </figure>
+      </div>
+      <div class="glide-stage" aria-hidden="true">
+        <svg class="glide-svg" viewBox="0 0 400 760" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="gwBack" x1="0" x2="1" y1="0" y2="0">
+              <stop offset="0" stop-color="#efe9c3"/><stop offset=".28" stop-color="#b9c98a"/><stop offset=".5" stop-color="#55673b"/><stop offset=".72" stop-color="#b9c98a"/><stop offset="1" stop-color="#efe9c3"/>
+            </linearGradient>
+            <radialGradient id="gwShadow"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+          </defs>
+          <g class="glide-ruler"><line x1="92" x2="308" y1="40" y2="40"/><line x1="92" x2="92" y1="32" y2="48"/><line x1="308" x2="308" y1="32" y2="48"/><text x="200" y="28">side slide</text></g>
+          <line class="glide-line" x1="200" y1="0" x2="200" y2="700"/>
+          <path class="glide-trail" d=""/>
+          <g class="glide-ripples"></g>
+          <g class="glide-fish">
+            <ellipse class="glide-shadow" cx="10" cy="14" rx="26" ry="80" fill="url(#gwShadow)"/>
+            <g class="glide-tail">
+              <path d="M-3.5,56 L-1.6,86 L1.6,86 L3.5,56 Z" fill="#e8507a"/>
+              <path d="M-17,0 C-16.5,22 -10,46 -4.5,60 L4.5,60 C10,46 16.5,22 17,0 Z" fill="url(#gwBack)" stroke="#2c3522" stroke-width="1"/>
+            </g>
+            <g class="glide-head">
+              <path d="M-17.5,2 C-20,-28 -15,-58 0,-72 C15,-58 20,-28 17.5,2 Z" fill="url(#gwBack)" stroke="#2c3522" stroke-width="1"/>
+              <circle cx="-15.5" cy="-48" r="5" fill="#d8b23a" stroke="#2c3522" stroke-width="1"/><circle cx="15.5" cy="-48" r="5" fill="#d8b23a" stroke="#2c3522" stroke-width="1"/>
+              <circle cx="-16" cy="-48" r="2.2" fill="#111"/><circle cx="16" cy="-48" r="2.2" fill="#111"/>
+              <circle cx="0" cy="-77" r="4" fill="none" stroke="#cfd3cc" stroke-width="1.6"/>
+            </g>
+          </g>
+        </svg>
+        <p class="glide-caption"><span class="glide-cap-text">Glide left</span></p>
+        <p class="glide-angler">↑ to the angler</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="family" id="family">
+  <div class="wrap">
+    <div class="sec-head sec-head-row">
+      <h2 class="h2">The Glideway range</h2>
+      <p>Three sizes, shown to scale. Slow floating out of the box, balanced to sit natural on the stop and swim at any speed.</p>
+    </div>
+    <div class="fam-list">{fam}
+    </div>
+  </div>
+</section>
+
+
+
+{depth_module(GLIDEWAYS["176"], "Glideway 176")}
+
+<div id="film">{film("glideway-236", "glideway-236", "Glideway 236")}</div>
+
+<section class="parade">
+  <div class="wrap sec-head sec-head-row">
+    <h2 class="h2">Colours</h2>
+    <p>Up to 29 finishes per model. {btn("glideway-176.html#colours", "Colour chart", "btn btn-small")}</p>
+  </div>
+  <div class="parade-row" data-dir="1"><div class="parade-track">{row1}{row1}</div></div>
+</section>
+
 <section class="cats">
   <div class="wrap">
     <div class="sec-head sec-head-row">
@@ -349,40 +426,6 @@ def home():
       <a class="cat" href="apparel.html" data-reveal><img src="img/brand/cat-apparel.webp" alt="" loading="lazy"><span>Apparel</span></a>
     </div>
   </div>
-</section>
-
-<section class="family" id="family">
-  <div class="wrap">
-    <div class="sec-head sec-head-row">
-      <h2 class="h2">The Glideway range</h2>
-      <p>Three sizes, shown to scale. Slow floating out of the box, balanced to sit natural on the stop and swim at any speed.</p>
-    </div>
-    <div class="fam-list">{fam}
-    </div>
-  </div>
-</section>
-
-<section class="glide" data-glide aria-label="Glide action">
-  <div class="glide-sticky">
-    <div class="glide-water" aria-hidden="true"></div>
-    <div class="glide-head wrap"><h2 class="h2">Glide action</h2><p>A wide S-shaped swim, side to side. It works at any speed and with any retrieve:</p></div>
-    <div class="glide-lure" aria-hidden="true"><img src="{color_img('1', '16')}" alt=""></div>
-    <div class="glide-copy wrap">
-      <p class="glide-list"><span>Fast steady</span><span>Super slow steady</span><span>Side walk</span><span>Twitching</span><span>Heavy sweeps</span></p>
-    </div>
-  </div>
-</section>
-
-{depth_module(GLIDEWAYS["176"], "Glideway 176")}
-
-<div id="film">{film("glideway-236", "glideway-236", "Glideway 236")}</div>
-
-<section class="parade">
-  <div class="wrap sec-head sec-head-row">
-    <h2 class="h2">Colours</h2>
-    <p>Up to 29 finishes per model. {btn("glideway-176.html#colours", "Colour chart", "btn btn-small")}</p>
-  </div>
-  <div class="parade-row" data-dir="1"><div class="parade-track">{row1}{row1}</div></div>
 </section>
 
 <section class="dealers-band">
