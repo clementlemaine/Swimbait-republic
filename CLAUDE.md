@@ -18,8 +18,8 @@ Retours de Clément sur la V1 (sombre, très longue) : trop long, couleurs pas l
 ```
 build.py            TOUT le contenu en 3 langues, sous la forme L("anglais", "français", "espagnol") + gabarits.
                     Ne pas éditer les .html à la main : modifier build.py puis  python3 build.py  (33 pages)
-Langues             anglais = index.html, glideway-176.html … ; français = index-fr.html, glideway-176-fr.html … ;
-                    espagnol = index-es.html … (fichiers à la racine, pas de dossiers : Safari bloque les chemins ../ en local)
+Langues             ESPAGNOL PAR DÉFAUT (demande de Clément, 2026-11-19) = index.html, glideway-176.html … ;
+                    anglais = index-en.html … ; français = index-fr.html … (fichiers à la racine : Safari bloque les chemins ../ en local)
                     Sélecteur EN / FR / ES dans l'en-tête, qui renvoie vers la même page dans l'autre langue.
 Accueil             vidéo (reste en place) + barre des 4 catégories → le panneau « gamme » glisse par-dessus avec un vrai
                     Glideway 176 (Galaxy Mirror, « GLIDEWAY 176 » imprimé) qui traverse → onglets 126/176/236 + bac de

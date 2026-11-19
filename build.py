@@ -1,8 +1,8 @@
 """Génère toutes les pages HTML du site Swimbait Republic, en 3 langues.
 
-- anglais : index.html, swimbaits.html, glideway-176.html …
+- espagnol (langue par défaut) : index.html, swimbaits.html, glideway-176.html …
+- anglais : index-en.html, swimbaits-en.html, glideway-176-en.html …
 - français : index-fr.html, swimbaits-fr.html, glideway-176-fr.html …
-- espagnol : index-es.html, swimbaits-es.html, glideway-176-es.html …
 
 Tout le texte est ici, sous la forme L("anglais", "français", "espagnol").
 Le contenu vient du site actuel swimbaitrepublic.com (anglais) ; le français et
@@ -13,9 +13,10 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1247"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
-LANGS = ["en", "fr", "es"]
-CUR = {"lang": "en"}
+V = "20261119-1249"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+LANGS = ["es", "en", "fr"]          # l'espagnol est la langue par défaut (pages sans suffixe)
+DEFAULT = "es"
+CUR = {"lang": DEFAULT}
 
 
 def L(en, fr, es):
@@ -31,7 +32,7 @@ def _(x):
 
 def url(slug, lang=None):
     lang = lang or CUR["lang"]
-    return f"{slug}.html" if lang == "en" else f"{slug}-{lang}.html"
+    return f"{slug}.html" if lang == DEFAULT else f"{slug}-{lang}.html"
 
 
 e = html.escape
