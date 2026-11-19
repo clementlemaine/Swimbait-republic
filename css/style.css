@@ -663,3 +663,17 @@ html { overflow-x: clip; }
 @media (max-width: 900px) { .mprev { display: none !important; } }
 .mprev-phone { padding-top: 32px; height: calc(844px * var(--ms, .72) + 43px); }
 .mprev-notch { top: 10px; width: 80px; height: 14px; }
+
+/* mobile preview: round icon button */
+.mprev-btn { width: 58px; height: 58px; padding: 0; border-radius: 50%; justify-content: center; gap: 0; position: relative; }
+.mprev-btn svg { width: 26px; height: 26px; }
+.mprev-btn .mprev-open, .mprev-btn .mprev-close { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.mprev-ico-x { display: none; }
+.mprev.is-open .mprev-ico-x { display: block; }
+.mprev.is-open .mprev-ico-phone { display: none; }
+.mprev.is-open .mprev-btn { background: var(--red-deep); color: #fff; }
+.mprev-btn::after { content: attr(data-tip); position: absolute; right: calc(100% + 10px); top: 50%; transform: translate(6px, -50%); white-space: nowrap;
+  background: var(--olive); color: var(--khaki-light); font: 700 .85rem/1 var(--f-display); letter-spacing: .06em; text-transform: uppercase;
+  padding: .5rem .7rem; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
+.mprev-btn:hover::after { opacity: 1; transform: translate(0, -50%); }
+.mprev.is-open .mprev-btn::after { display: none; }

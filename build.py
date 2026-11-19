@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1233"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1234"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
@@ -332,8 +332,9 @@ def layout(slug, title, desc, body, section=""):
 </footer>
 
 <div class="mprev" data-mprev hidden>
-  <button class="mprev-btn" type="button" aria-expanded="false" aria-controls="mprev-panel">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+  <button class="mprev-btn" type="button" aria-expanded="false" aria-controls="mprev-panel" data-tip="{_(L('Mobile view', 'Vue mobile', 'Vista móvil'))}">
+    <svg class="mprev-ico-phone" viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+    <svg class="mprev-ico-x" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     <span class="mprev-open">{_(L('Mobile view', 'Vue mobile', 'Vista móvil'))}</span><span class="mprev-close">{_(L('Close', 'Fermer', 'Cerrar'))}</span>
   </button>
   <div class="mprev-panel" id="mprev-panel" role="dialog" aria-label="{_(L('Mobile view', 'Vue mobile', 'Vista móvil'))}">
