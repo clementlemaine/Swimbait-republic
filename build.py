@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1254"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1258"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["es", "en", "fr"]          # l'espagnol est la langue par défaut (pages sans suffixe)
 DEFAULT = "es"
 CUR = {"lang": DEFAULT}
@@ -365,6 +365,22 @@ def page_hero(kicker, title, lede, img):
 </section>"""
 
 
+def depth_parts(g):
+    """Renvoie (bac d'eau, boutons Lead Stickers) séparément."""
+    btns = "".join(
+        f'<button class="depth-btn{" is-on" if i == 0 else ""}" data-depth="{i}" aria-pressed="{"true" if i == 0 else "false"}">'
+        f'<span class="depth-n">{i}</span><span>{_(U["cav"][i])}</span><strong>{_(s)}</strong></button>'
+        for i, s in enumerate(g["depth"]))
+    tank = f"""
+        <div class="depth-tank" aria-hidden="true">
+          <div class="depth-surface"></div>
+          <ol class="depth-ruler"><li>0 ft</li><li>3</li><li>6</li><li>9</li><li>12 ft</li></ol>
+          <div class="depth-lure" data-state="0"><img src="{color_img(g['pid'], g['hero'])}" alt=""><span class="depth-tag">{_(g['depth'][0])}</span></div>
+          <div class="depth-bubbles"><i></i><i></i><i></i><i></i><i></i></div>
+        </div>"""
+    return tank, f'<div class="depth-btns" role="group" aria-label="Lead Stickers">{btns}</div>'
+
+
 def depth_box(g):
     """Le bac d'eau + les 3 boutons Lead Stickers (vraies photos du leurre)."""
     btns = "".join(
@@ -464,17 +480,19 @@ def home():
           <span class="rtab-pick" aria-hidden="true"><span class="rtab-choose">{_(L('Choose', 'Choisir', 'Elegir'))} →</span><span class="rtab-chosen">✓ {_(L('Selected', 'Sélectionné', 'Seleccionado'))}</span></span>
         </button>"""
         panels += f"""
-      <div class="rpanel" role="tabpanel" id="panel-{k}" aria-labelledby="tab-{k}" data-k="{k}"{'' if on else ' hidden'}>
+      <div class="rpanel" role="tabpanel" id="panel-{k}" aria-labelledby="tab-{k}" data-k="{k}" data-depth-module{'' if on else ' hidden'}>
         <div class="rpanel-info">
           <p class="eyebrow">{_(g['kicker'])}</p>
           <h3 class="stencil">Glideway {k}</h3>
           <p>{_(g['lede'])}</p>
           {spec_list(g['specs'], 'mini-specs')}
+          <div class="rpanel-sticks">
+            <p class="rstep"><span>2</span>{_(L('Add Lead Stickers and watch it sink', 'Ajoutez des Lead Stickers et regardez-le couler', 'Añade Lead Stickers y mira cómo se hunde'))}</p>
+            {depth_parts(g)[1]}
+          </div>
           {btn(url(f'glideway-{k}'), L(f'Discover the Glideway {k}', f'Voir le Glideway {k}', f'Ver el Glideway {k}'))}
         </div>
-        <div class="rpanel-depth">
-          <p class="rstep"><span>2</span>{_(L('Add Lead Stickers and watch it sink', 'Ajoutez des Lead Stickers et regardez-le couler', 'Añade Lead Stickers y mira cómo se hunde'))}</p>
-          {depth_box(g)}
+        <div class="rpanel-depth">{depth_parts(g)[0]}
         </div>
       </div>"""
 

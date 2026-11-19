@@ -857,3 +857,13 @@ html { overflow-x: clip; }
 @media (max-width: 480px) { .depth-box .depth-btns { grid-template-columns: 1fr; } }
 .depth-n { display: flex; gap: 5px; align-items: stretch; }
 .depth-btn .depth-n::before, .depth-btn .depth-n::after { flex: 1; }
+
+/* gamme : boutons Lead Stickers dans la colonne de gauche, bac d'eau à droite */
+.rpanel-sticks { margin: 1.6rem 0 1.8rem; padding-top: 1.4rem; border-top: 2px solid var(--line); }
+.rpanel-sticks .depth-btns { margin: 0; gap: .6rem; }
+.rpanel-depth { position: sticky; top: calc(var(--nav-h) + 1rem); }
+.rpanel-depth .depth-tank { aspect-ratio: auto; height: clamp(360px, 46vw, 560px); }
+@media (max-width: 900px) { .rpanel-depth { position: static; } .rpanel-depth .depth-tank { height: 340px; } }
+@media (max-width: 480px) { .rpanel-sticks .depth-btns { grid-template-columns: 1fr; } }
+.depth-btns .depth-btn.is-on[data-depth="0"] .depth-n::before, .depth-btns .depth-btn.is-on[data-depth="0"] .depth-n::after,
+.depth-btns .depth-btn.is-on[data-depth="1"] .depth-n::after { background: transparent !important; border: 2px dashed #fff !important; }
