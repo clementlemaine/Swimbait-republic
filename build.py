@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1242"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1246"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
@@ -602,6 +602,46 @@ def swimbaits():
                   L("The Glideway family: glide baits in 126, 176 and 236 sizes.", "La gamme Glideway : des glide baits en 126, 176 et 236.", "La gama Glideway: glide baits en 126, 176 y 236."), body, "swimbaits")
 
 
+# vues du leurre sous 6 angles : une photo déposée dans img/views/<taille>/<vue>.webp apparaît toute seule
+VIEWS = [
+    ("profil", L("Side", "Profil", "Perfil")),
+    ("face", L("Front", "Face", "Frente")),
+    ("autre-cote", L("Other side", "Autre côté", "Otro lado")),
+    ("dessus", L("Top", "Dessus", "Arriba")),
+    ("dessous", L("Bottom", "Dessous", "Abajo")),
+    ("arriere", L("Back", "Arrière", "Atrás")),
+]
+CAMERA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+
+
+def views_block(k, g, name):
+    stages, tabs = "", ""
+    for i, (key, label) in enumerate(VIEWS):
+        own = f"img/views/{k}/{key}.webp"
+        if key == "profil":
+            src = color_img(g["pid"], g["hero"])
+        elif os.path.exists(os.path.join(ROOT, own)):
+            src = own
+        else:
+            src = None
+        if key == "profil":
+            inner = f'<div class="pd-lure"><img src="{src}" alt="{name} — {_(label)}" fetchpriority="high"></div>'
+        elif src:
+            inner = f'<img class="view-img" src="{src}" alt="{name} — {_(label)}" loading="lazy">'
+        else:
+            inner = (f'<div class="view-empty">{CAMERA}<b>{_(label)}</b>'
+                     f'<span>{_(L("Photo coming soon", "Photo à venir", "Foto próximamente"))}</span></div>')
+        stages += f'<div class="view" role="tabpanel" id="view-{key}" data-view="{key}"{"" if i == 0 else " hidden"}>{inner}</div>'
+        thumb = f'<img src="{src}" alt="">' if src else CAMERA
+        tabs += (f'<button class="vtab{" is-on" if i == 0 else ""}{"" if src else " vtab-empty"}" role="tab" aria-controls="view-{key}" '
+                 f'aria-selected="{"true" if i == 0 else "false"}" data-view="{key}"><span class="vtab-thumb">{thumb}</span>{_(label)}</button>')
+    return f"""
+    <div class="views" data-views>
+      <div class="views-stage">{stages}</div>
+      <div class="views-tabs" role="tablist" aria-label="{_(L('Views', 'Vues', 'Vistas'))}">{tabs}</div>
+    </div>"""
+
+
 def glideway(k):
     g = GLIDEWAYS[k]
     name = f"Glideway {k}"
@@ -626,7 +666,7 @@ def glideway(k):
     <a class="crumb" href="{url('swimbaits')}">← Swimbaits</a>
     <p class="eyebrow">{_(g['kicker'])}</p>
     <h1 class="stencil pd-title" data-split>{name}</h1>
-    <div class="pd-lure"><img src="{color_img(g['pid'], g['hero'])}" alt="{name}" fetchpriority="high"></div>
+    {views_block(k, g, name)}
     <div class="pd-hero-foot">
       <p class="pd-tag">{_(U['tagline'])}</p>
       <div class="hero-ctas">{btn('#colours', U['chart'])}{btn(url('dealers'), U['where_buy'], 'btn btn-ghost')}</div>

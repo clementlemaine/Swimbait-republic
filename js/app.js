@@ -209,6 +209,24 @@
     window.addEventListener("resize", function () { center(current, false); });
   }
 
+
+  // ------------------------------------------------ product views (side / front / other side / top / bottom / back)
+  $$("[data-views]").forEach(function (box) {
+    var vtabs = $$(".vtab", box), views = $$(".view", box);
+    function pick(key, focus) {
+      vtabs.forEach(function (b) { var on = b.dataset.view === key; b.classList.toggle("is-on", on); b.setAttribute("aria-selected", String(on)); b.tabIndex = on ? 0 : -1; if (on && focus) b.focus(); });
+      views.forEach(function (v) { v.hidden = v.dataset.view !== key; });
+    }
+    vtabs.forEach(function (b, i) {
+      b.tabIndex = i === 0 ? 0 : -1;
+      b.addEventListener("click", function () { pick(b.dataset.view); });
+      b.addEventListener("keydown", function (e) {
+        var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+        if (d) { e.preventDefault(); pick(vtabs[(i + d + vtabs.length) % vtabs.length].dataset.view, true); }
+      });
+    });
+  });
+
   // ------------------------------------------------ colour charts (product pages)
   $$(".swatches").forEach(function (list) {
     var scope = list.closest("section");
@@ -231,6 +249,7 @@
         pre.src = s.dataset.src;
         if (scope.id === "colours") {
           var hero = $(".pd-lure img"); if (hero) hero.src = s.dataset.src;
+          var th = $('.vtab[data-view="profil"] .vtab-thumb img'); if (th) th.src = s.dataset.src;
           var dl = $(".depth-lure img"); if (dl) dl.src = s.dataset.src;
         }
       });

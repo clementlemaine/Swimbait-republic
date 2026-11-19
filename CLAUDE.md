@@ -31,6 +31,13 @@ css/style.css, js/app.js, img/, media/, tools/prepare_assets.py, _scrape/ (ignor
 Abandonné à la demande de Clément (2026-11-19) : la vue du dessus dessinée du leurre (forme pas fidèle). **Ne jamais dessiner le leurre** : uniquement les vraies photos détourées.
 Le français et l'espagnol sont des traductions faites par Claude : à faire relire par le client (vocabulaire pêche : flottant lent / coulant lent, flotante lento / hundimiento lento).
 
+
+## Vues 6 angles des fiches Glideway (2026-11-19)
+
+Sous le titre de chaque fiche, il y a 6 boutons : Profil · Face · Autre côté · Dessus · Dessous · Arrière.
+Seul le profil a une vraie photo (le coloris détouré). Les 5 autres affichent « Photo à venir », car le client n'a pas ces photos.
+**Pour les ajouter :** déposer `img/views/<126|176|236>/<face|autre-cote|dessus|dessous|arriere>.webp` (fond blanc ou détouré), puis `python3 build.py`. La photo remplace automatiquement « Photo à venir ». **Ne pas générer ni dessiner ces vues.**
+
 ## Règles
 
 - **Ne rien inventer.** Tous les textes, specs, coloris et revendeurs viennent du site actuel. Seules des fautes d'anglais évidentes ont été corrigées (« it's » → « is », « addind », etc.). Les titres d'accroche (« Pick your poison », « Big baits. Bigger bites. », « Dial in your depth ») sont du ton éditorial, pas des affirmations.

@@ -750,3 +750,27 @@ html { overflow-x: clip; }
 @media (max-width: 900px) { .rtab-img { height: 44px; } }
 .rtab-img { justify-self: stretch; width: 100%; min-width: 0; justify-content: flex-start; padding-right: 1.6rem; }
 .rtab-img img { flex: 0 1 auto; min-width: 0; }
+
+/* fiche produit : visionneuse 6 angles */
+.views { display: grid; gap: .8rem; margin: .4rem 0 1rem; }
+.views-stage { position: relative; min-height: clamp(200px, 30vw, 380px); display: grid; }
+.view { display: grid; place-items: center; animation: panel-in .4s var(--ease); }
+.view[hidden] { display: none; }
+.view .pd-lure { width: 100%; min-height: 0; padding: 1rem 0; }
+.view-img { max-width: min(88%, 900px); max-height: clamp(200px, 30vw, 380px); object-fit: contain; filter: drop-shadow(0 22px 22px rgba(0,0,0,.2)); }
+.view-empty { width: min(100%, 720px); height: clamp(190px, 26vw, 330px); display: grid; place-content: center; justify-items: center; gap: .4rem;
+  border: 2px dashed var(--line); background: repeating-linear-gradient(135deg, #fbfbf9 0 14px, #f3f3ef 14px 28px); color: var(--sage); text-align: center; }
+.view-empty svg { width: 44px; height: 44px; }
+.view-empty b { font: 400 clamp(1.4rem, 2.6vw, 2rem)/1 var(--f-stencil); text-transform: uppercase; color: var(--olive); }
+.view-empty span { font: 700 .85rem var(--f-body); letter-spacing: .1em; text-transform: uppercase; }
+.views-tabs { display: grid; grid-template-columns: repeat(6, 1fr); gap: .5rem; }
+.vtab { display: grid; justify-items: center; gap: .35rem; padding: .6rem .4rem .55rem; background: #fff; border: 2px solid var(--line); border-radius: 6px;
+  font: 800 .95rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .04em; color: var(--olive); cursor: pointer; transition: border-color .25s, background .25s, transform .25s var(--ease); }
+.vtab:hover { border-color: var(--olive); transform: translateY(-2px); }
+.vtab-thumb { height: 34px; width: 100%; display: grid; place-items: center; }
+.vtab-thumb img { max-height: 34px; max-width: 90%; object-fit: contain; }
+.vtab-thumb svg { width: 26px; height: 26px; color: var(--sage); }
+.vtab-empty { color: var(--muted); }
+.vtab.is-on { background: var(--olive); border-color: var(--olive); color: #fff; }
+.vtab.is-on .vtab-thumb svg { color: var(--khaki); }
+@media (max-width: 700px) { .views-tabs { grid-template-columns: repeat(3, 1fr); } .vtab { font-size: .82rem; } }
