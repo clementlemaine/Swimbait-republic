@@ -709,3 +709,44 @@ html { overflow-x: clip; }
 .hcat small { white-space: normal; overflow: visible; text-overflow: clip; line-height: 1.25; }
 .hcat img { width: 84px; height: 56px; }
 @media (max-width: 1200px) { .hcat img { display: none; } }
+
+/* gamme : les tailles doivent se lire comme des boutons */
+.rstep { display: flex; align-items: center; gap: .7rem; margin: 0 0 .9rem; font: 800 clamp(1.05rem, 1.6vw, 1.3rem)/1.2 var(--f-display); text-transform: uppercase; letter-spacing: .03em; color: var(--olive); }
+.rstep span { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--red); color: #fff; font-size: 1.1rem; }
+.rtabs { gap: 1rem; margin-bottom: 2.2rem; }
+.rtab { position: relative; overflow: visible; cursor: pointer; background: #fff; border: 2px solid var(--line); border-bottom-width: 2px; border-radius: 6px;
+  padding: 1rem 1.1rem 1rem; box-shadow: 0 2px 0 rgba(0,0,0,.04); transition: transform .3s var(--ease), box-shadow .3s, border-color .3s, background .3s; }
+.rtab-img { overflow: hidden; }
+.rtab:hover { transform: translateY(-4px); border-color: var(--olive); box-shadow: 0 12px 26px rgba(0,0,0,.12); }
+.rtab-radio { position: absolute; top: .8rem; right: .8rem; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); background: #fff; transition: border-color .3s, background .3s; }
+.rtab:hover .rtab-radio { border-color: var(--olive); }
+.rtab-pick { margin-top: .7rem; font: 800 .95rem/1 var(--f-display); text-transform: uppercase; letter-spacing: .05em; }
+.rtab-choose { display: inline-block; padding: .5rem .8rem; border: 2px solid var(--olive); color: var(--olive); border-radius: 3px; transition: background .3s, color .3s; }
+.rtab:hover .rtab-choose { background: var(--olive); color: #fff; }
+.rtab-chosen { display: none; padding: .5rem .8rem; background: var(--red); color: #fff; border-radius: 3px; }
+.rtab.is-on { background: var(--olive); border-color: var(--olive); box-shadow: 0 14px 30px rgba(62,73,57,.35); }
+.rtab.is-on b { color: #fff; }
+.rtab.is-on small { color: var(--khaki-light); }
+.rtab.is-on .rtab-radio { border-color: #fff; background: var(--red); box-shadow: inset 0 0 0 4px #fff; }
+.rtab.is-on .rtab-choose { display: none; }
+.rtab.is-on .rtab-chosen { display: inline-block; }
+.rtab.is-on .rtab-img img { filter: drop-shadow(0 8px 10px rgba(0,0,0,.35)); }
+/* petite flèche qui relie la taille choisie au détail en dessous */
+.rtab.is-on::after { content: ""; position: absolute; left: 50%; bottom: -13px; width: 22px; height: 22px; background: var(--olive); transform: translateX(-50%) rotate(45deg); border-radius: 0 0 4px 0; }
+/* invite discrète sur les tailles non choisies */
+.rtabs:not(.touched) .rtab:not(.is-on) .rtab-choose { animation: nudge 2.2s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+.rpanel { border-top: 2px solid var(--olive); padding-top: 1.6rem; }
+@media (max-width: 900px) {
+  .rtabs { gap: .5rem; }
+  .rtab { padding: .7rem .6rem; }
+  .rtab-radio { width: 16px; height: 16px; top: .5rem; right: .5rem; }
+  .rtab-pick { font-size: .78rem; }
+  .rtab-choose, .rtab-chosen { padding: .35rem .45rem; }
+  .rtab b { font-size: 1rem; }
+}
+.rtab-img { height: clamp(56px, 7vw, 96px); overflow: visible; }
+.rtab-img img { width: auto; max-width: 100%; height: calc(var(--k) * 100%); object-fit: contain; }
+@media (max-width: 900px) { .rtab-img { height: 44px; } }
+.rtab-img { justify-self: stretch; width: 100%; min-width: 0; justify-content: flex-start; padding-right: 1.6rem; }
+.rtab-img img { flex: 0 1 auto; min-width: 0; }

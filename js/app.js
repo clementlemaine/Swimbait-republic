@@ -110,7 +110,7 @@
     }
     tabs.forEach(function (t, i) {
       t.tabIndex = t.classList.contains("is-on") ? 0 : -1;
-      t.addEventListener("click", function () { selectTab(t.dataset.k); });
+      t.addEventListener("click", function () { selectTab(t.dataset.k); t.parentNode.classList.add("touched"); });
       t.addEventListener("keydown", function (e) {
         var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
         if (d) { e.preventDefault(); selectTab(tabs[(i + d + tabs.length) % tabs.length].dataset.k, true); }
@@ -362,8 +362,6 @@
           }
         });
       }
-      // range tabs: lures swim in at their scale
-      gsap.from(".rtab-img img", { x: -80, opacity: 0, duration: 1.1, ease: "power3.out", stagger: 0.12, scrollTrigger: { trigger: ".rtabs", start: "top 85%" } });
       // product cards rise in
       gsap.from(".pcard", { y: 50, opacity: 0, duration: 1, ease: "power3.out", stagger: 0.1, scrollTrigger: { trigger: ".pcards", start: "top 85%" } });
     }

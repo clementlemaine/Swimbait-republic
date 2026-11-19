@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1237"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1240"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
@@ -458,7 +458,9 @@ def home():
         tabs += f"""
         <button class="rtab{' is-on' if on else ''}" role="tab" id="tab-{k}" aria-controls="panel-{k}" aria-selected="{'true' if on else 'false'}" data-k="{k}" style="--k:{int(k)/236:.3f}">
           <span class="rtab-img"><img src="{color_img(g['pid'], g['hero'])}" alt=""></span>
+          <span class="rtab-radio" aria-hidden="true"></span>
           <b>Glideway {k}</b><small>{weight} · {_(U['colours_n']).format(n=len(g['colors']))}</small>
+          <span class="rtab-pick" aria-hidden="true"><span class="rtab-choose">{_(L('Choose', 'Choisir', 'Elegir'))} →</span><span class="rtab-chosen">✓ {_(L('Selected', 'Sélectionné', 'Seleccionado'))}</span></span>
         </button>"""
         panels += f"""
       <div class="rpanel" role="tabpanel" id="panel-{k}" aria-labelledby="tab-{k}" data-k="{k}"{'' if on else ' hidden'}>
@@ -470,7 +472,7 @@ def home():
           {btn(url(f'glideway-{k}'), L(f'Discover the Glideway {k}', f'Voir le Glideway {k}', f'Ver el Glideway {k}'))}
         </div>
         <div class="rpanel-depth">
-          <p class="eyebrow">{_(U['depth_eyebrow'])}</p>
+          <p class="rstep"><span>2</span>{_(L('Add Lead Stickers and watch it sink', 'Ajoutez des Lead Stickers et regardez-le couler', 'Añade Lead Stickers y mira cómo se hunde'))}</p>
           {depth_box(g)}
         </div>
       </div>"""
@@ -508,6 +510,7 @@ def home():
       <h2 class="h2">{_(L('The Glideway range', 'La gamme Glideway', 'La gama Glideway'))}</h2>
       <p>{_(L('Choose a size, then add Lead Stickers to see how it sits in the water.', 'Choisissez une taille, puis ajoutez des Lead Stickers pour voir comment il se place dans l’eau.', 'Elige un tamaño y añade Lead Stickers para ver cómo se coloca en el agua.'))}</p>
     </div>
+    <p class="rstep"><span>1</span>{_(L('Choose your size — click a Glideway', 'Choisissez votre taille — cliquez sur un Glideway', 'Elige tu tamaño — haz clic en un Glideway'))}</p>
     <div class="rtabs" role="tablist" aria-label="Glideway">{tabs}
     </div>
     {panels}
