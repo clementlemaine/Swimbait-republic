@@ -302,7 +302,10 @@
     } else {
       window.addEventListener("scroll", function () { onScroll(window.scrollY); }, { passive: true });
     }
-    onScroll(window.scrollY);
+    // reload always starts from the top of the page
+    window.scrollTo(0, 0); if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true, force: true });
+    window.addEventListener("pageshow", function (ev) { if (ev.persisted) { window.scrollTo(0, 0); if (window.__lenis) window.__lenis.scrollTo(0, { immediate: true, force: true }); } });
+    onScroll(0);
     if (hasGsap && !reduced) animateWithGsap(); else fallbackReveal();
   }
 

@@ -13,7 +13,7 @@ import json
 import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-V = "20261119-1240"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
+V = "20261119-1242"  # numéro de version des fichiers css/js (mis à jour par maj.sh)
 LANGS = ["en", "fr", "es"]
 CUR = {"lang": "en"}
 
@@ -287,7 +287,7 @@ def layout(slug, title, desc, body, section=""):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600;700&family=Black+Ops+One&display=swap">
 <link rel="stylesheet" href="css/style.css?v={V}">
-<script>document.documentElement.classList.add('js');setTimeout(function(){{var c=document.querySelector('.curtain');if(c&&!c.classList.contains('is-in'))c.classList.add('is-out')}},2500);</script>
+<script>if('scrollRestoration' in history)history.scrollRestoration='manual';if(location.hash)history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0);document.documentElement.classList.add('js');setTimeout(function(){{var c=document.querySelector('.curtain');if(c&&!c.classList.contains('is-in'))c.classList.add('is-out')}},2500);</script>
 </head>
 <body class="page-{slug}">
 <a class="skip" href="#main">{_(U['skip'])}</a>
