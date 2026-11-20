@@ -905,3 +905,10 @@ html { overflow-x: clip; }
 .pd-facts .chips { margin-top: 1.4rem; }
 .pd-hero-inner { padding-bottom: 2rem; }
 @media (max-width: 640px) { .pd-swatches { grid-template-columns: repeat(3, 1fr); } }
+
+/* Safari : les cartes qui grossissent au survol sont dessinées d'un seul bloc (évite que texte et leurre vibrent) */
+.rtab, .vtab, .depth-btn, .back-btn { will-change: transform; backface-visibility: hidden; -webkit-backface-visibility: hidden; transform: translateZ(0); }
+.rtab:hover { transform: translateZ(0) scale(1.02); }
+.vtab:hover { transform: translateZ(0) scale(1.03); }
+.depth-btn:hover { transform: translateZ(0) scale(1.02); }
+.back-btn:hover { transform: translateZ(0) scale(1.04); }
