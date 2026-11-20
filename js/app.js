@@ -173,7 +173,19 @@
       var start = Math.min(3, items.length - 1);
       requestAnimationFrame(function () { center(start, false); paint(); });
     }
-    strip.addEventListener("scroll", function () { if (!raf) raf = requestAnimationFrame(paint); }, { passive: true });
+    // recentre doucement le coloris le plus proche quand le défilement s'arrête
+    // (remplace l'aimantation CSS, qui bloquait le retour vers la gauche au trackpad dans Safari)
+    var settle = null;
+    strip.addEventListener("scroll", function () {
+      if (!raf) raf = requestAnimationFrame(paint);
+      clearTimeout(settle);
+      settle = setTimeout(function () {
+        if (drag) return;
+        var it = items[current]; if (!it) return;
+        var target = it.offsetLeft - (strip.clientWidth - it.offsetWidth) / 2;
+        if (Math.abs(strip.scrollLeft - target) > 2) center(current, true);
+      }, 160);
+    }, { passive: true });
     $(".cv-prev", cv).addEventListener("click", function () { center(Math.max(0, current - 1), true); });
     $(".cv-next", cv).addEventListener("click", function () { center(Math.min(items.length - 1, current + 1), true); });
     strip.addEventListener("keydown", function (e) {

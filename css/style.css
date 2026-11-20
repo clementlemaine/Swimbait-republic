@@ -601,9 +601,9 @@ main > section:not(.hero), main > div { position: relative; z-index: 1; }
 .cv-link svg { width: 16px; }
 .cv-link:hover { color: var(--red-deep); }
 .cv-rail { position: relative; display: flex; align-items: center; gap: .4rem; margin-top: .8rem; }
-.cv-strip { flex: 1; display: flex; gap: .4rem; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 1rem calc(50% - 75px); cursor: grab; outline: none; }
+.cv-strip { flex: 1; display: flex; gap: .4rem; overflow-x: auto; scrollbar-width: none; padding: 1rem calc(50% - 75px); cursor: grab; outline: none; }
 .cv-strip::-webkit-scrollbar { display: none; }
-.cv-strip.dragging { cursor: grabbing; scroll-snap-type: none; }
+.cv-strip.dragging { cursor: grabbing; }
 .cv-item { flex: 0 0 150px; scroll-snap-align: center; display: grid; gap: .3rem; justify-items: center; padding: .4rem; transform: scale(var(--s, .8)); opacity: var(--o, .5); transition: transform .15s linear, opacity .15s linear; }
 .cv-item img { width: 100%; height: 50px; object-fit: contain; pointer-events: none; }
 .cv-item span { font: 700 .78rem/1.1 var(--f-body); color: var(--muted); text-align: center; }
